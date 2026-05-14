@@ -226,6 +226,32 @@
     a.tcard:active { transform: translateY(0); }
     a.tcard:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
 
+    /* ── Reviews carousel (mobile) / grid (desktop) ── */
+    .reviews-wrap {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+    }
+    .reviews-wrap::-webkit-scrollbar { display: none; }
+    .reviews-wrap > a {
+      flex: 0 0 82%;
+      scroll-snap-align: start;
+    }
+    @media (min-width: 768px) {
+      .reviews-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        overflow-x: visible;
+        padding-bottom: 0;
+      }
+      .reviews-wrap > a { flex: none; }
+    }
+
     /* ── Marquee ── */
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     .marquee-track { animation: marquee 22s linear infinite; }
@@ -614,8 +640,7 @@
         <div class="gold-rule mx-auto mt-6"></div>
       </div>
 
-      <!-- Photo cards — top row -->
-      <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div class="reviews-wrap">
 
         <a href="https://www.facebook.com/share/p/1BAVLDHzF2/" target="_blank" rel="noopener noreferrer"
            class="tcard reveal p-8 rounded-sm block">
@@ -669,10 +694,6 @@
           </div>
         </a>
 
-      </div>
-
-      <!-- Compact text-only cards — bottom row -->
-      <div class="grid md:grid-cols-2 gap-6">
 
         <a href="https://www.facebook.com/share/p/1JGa22JZU3/" target="_blank" rel="noopener noreferrer"
            class="tcard reveal p-5 rounded-sm block">
