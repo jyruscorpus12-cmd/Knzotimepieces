@@ -371,67 +371,9 @@
 
       <div class="grid md:grid-cols-3 gap-7">
 
-        <!-- ── Panda ── -->
-        <article class="watch-card reveal rounded-sm overflow-hidden group">
-          <div class="img-wrap relative overflow-hidden bg-knzo-elevated" style="aspect-ratio: 4/5;">
-            <img
-              src="Brand_assets/Seiko Photos/SEIKO SSC813 PANDA V1/Panda V1 - 1.jpg"
-              alt="Seiko Prospex SSC813 Panda Chronograph"
-              class="w-full h-full object-cover"
-            >
-            <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/68 via-transparent to-transparent" style="transition: opacity 0.3s ease;"></div>
-            <div class="absolute inset-0" style="background: rgba(178,154,75,0.04); mix-blend-mode: multiply;"></div>
-            <div class="card-hover-btn absolute inset-0 flex items-center justify-center">
-              <a href="#contact" class="btn-gold px-7 py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-black font-semibold rounded-sm">
-                Inquire Now
-              </a>
-            </div>
-          </div>
-          <div class="p-6">
-            <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-1">Seiko Prospex</p>
-            <div class="flex justify-between items-baseline mb-3">
-              <h3 class="font-display text-[1.35rem] font-light text-knzo-cream">SSC813 Panda</h3>
-              <p class="font-display text-lg text-knzo-gold">₱27,500</p>
-            </div>
-            <p class="font-body text-[11px] text-knzo-silver/45 leading-[1.7] border-t border-white/5 pt-3">
-              Solar Chronograph · Tachymeter · Sapphire Crystal
-            </p>
-            <button class="btn-ghost mt-5 w-full py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-cream rounded-sm">
-              View Details
-            </button>
-          </div>
-        </article>
-
-        <!-- ── Lukia ── -->
-        <article class="watch-card reveal d1 rounded-sm overflow-hidden group">
-          <div class="img-wrap relative overflow-hidden bg-knzo-elevated" style="aspect-ratio: 4/5;">
-            <img
-              src="Brand_assets/SEIKO SSVM62 LUKIA/IMG_1644.jpg"
-              alt="Seiko SSVM62 Lukia Automatic"
-              class="w-full h-full object-cover"
-            >
-            <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/68 via-transparent to-transparent"></div>
-            <div class="absolute inset-0" style="background: rgba(178,154,75,0.04); mix-blend-mode: multiply;"></div>
-            <div class="card-hover-btn absolute inset-0 flex items-center justify-center">
-              <a href="#contact" class="btn-gold px-7 py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-black font-semibold rounded-sm">
-                Inquire Now
-              </a>
-            </div>
-          </div>
-          <div class="p-6">
-            <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-1">Seiko Lukia</p>
-            <div class="flex justify-between items-baseline mb-3">
-              <h3 class="font-display text-[1.35rem] font-light text-knzo-cream">SSVM62</h3>
-              <p class="font-display text-lg text-knzo-gold">₱24,590</p>
-            </div>
-            <p class="font-body text-[11px] text-knzo-silver/45 leading-[1.7] border-t border-white/5 pt-3">
-              Mechanical Automatic · Rose Gold · Sapphire Crystal
-            </p>
-            <button class="btn-ghost mt-5 w-full py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-cream rounded-sm">
-              View Details
-            </button>
-          </div>
-        </article>
+        <!-- ── Random picks (injected by script below) ── -->
+        <div id="rc-slot-1"></div>
+        <div id="rc-slot-2"></div>
 
         <!-- ── Explore All ── -->
         <a href="catalog.html"
@@ -900,6 +842,57 @@
 
       videoObserver.observe(aboutVideoContainer);
     }
+  </script>
+
+  <script>
+    (function () {
+      const watches = [
+        { brand: "Seiko Prospex",    name: "SSC813 Panda",           price: "₱27,500",  specs: "Solar Chronograph · Tachymeter · Sapphire Crystal",                          image: "Brand_assets/Seiko Photos/SEIKO SSC813 PANDA V1/Panda V1 - 1.jpg",                               alt: "Seiko Prospex SSC813 Panda",       inStock: true, detailUrl: "watch-ssc813.html" },
+        { brand: "Seiko SKX",        name: "SKX009 Pepsi",           price: "₱23,000",  specs: "Automatic · 200m Water Resistance · Pepsi Bezel",                            image: "Brand_assets/Seiko Photos/SKX009 PEPSI DIVERS/Pepsi Divers - 1.jpg",                              alt: "Seiko SKX009 Pepsi Diver",         inStock: true, detailUrl: "watch-skx009.html" },
+        { brand: "Seiko Selection",  name: "SSDE009 Open Heart",     price: "₱XX,XXX",  specs: "34.2mm · 100m Water Resist · 41HR Power Reserve · 4R38 Movement",            image: "Brand_assets/Seiko Photos/SSDE009 Open Heart White Dial/Open Heart White Dial - 1.jpg",          alt: "Seiko Selection SSDE009 Open Heart", inStock: true, detailUrl: "watch-ssde009.html" },
+        { brand: "Seiko Selection",  name: "SSEH001 Silver Tank",    price: "₱XX,XXX",  specs: "18.9mm · 30m Water Resist · Quartz · 4N30 Movement",                         image: "Brand_assets/Seiko Photos/SSEH001 Classic Silver Tank Leather/(W) Classic Silver Tank 1.jpg",  alt: "Seiko Selection SSEH001 Silver Tank", inStock: true, detailUrl: "watch-sseh001.html" },
+        { brand: "Citizen Tsuyosa",  name: "NJ0150 Tsuyosa Green",   price: "₱18,890",  specs: "40mm · Automatic · Cal. 8210 · Steel Bracelet · Day-Date Display",           image: "Brand_assets/HD CITIZEN PICS/TSUYOSA GREEN/IMG_3487.jpg",                                        alt: "Citizen Tsuyosa NJ0150 Green",     inStock: true, detailUrl: "watch-nj0150.html" },
+        { brand: "Citizen Tsuyosa",  name: "NJ0151 Tsuyosa Blue",    price: "₱18,890",  specs: "40mm · Automatic · Cal. 8210 · Steel Bracelet · Day-Date Display",           image: "Brand_assets/HD CITIZEN PICS/TSUYOSA BLUE/IMG_3475.jpg",                                         alt: "Citizen Tsuyosa NJ0151 Blue",      inStock: true, detailUrl: "watch-nj0151.html" },
+        { brand: "Citizen Eco-Drive",name: "BM6960 Eco-Drive Black", price: "₱11,590",  specs: "Solar Eco-Drive · Cal. E111 · Steel Bracelet · Date Display · 100m Water Resist", image: "Brand_assets/HD CITIZEN PICS/ECO DRIVE BLACK/IMG_3496.jpg",                                   alt: "Citizen Eco-Drive BM6960 Black",   inStock: true, detailUrl: "watch-bm6960-black.html" },
+        { brand: "Citizen Eco-Drive",name: "BM6960 Eco-Drive White", price: "₱11,590",  specs: "Solar Eco-Drive · Cal. E111 · Steel Bracelet · Date Display · 100m Water Resist", image: "Brand_assets/HD CITIZEN PICS/ECO DRIVE WHITE/IMG_3502.jpg",                                   alt: "Citizen Eco-Drive BM6960 White",   inStock: true, detailUrl: "watch-bm6960-white.html" },
+        { brand: "Citizen Automatic",name: "NH8350 Automatic Leather",price: "₱11,980", specs: "Automatic · Cal. 8200 · Leather Strap · Day-Date Display · 50m Water Resist", image: "Brand_assets/HD CITIZEN PICS/AUTOMATIC LEATHER/IMG_3507.jpg",                                       alt: "Citizen NH8350 Automatic Leather", inStock: true, detailUrl: "watch-nh8350.html" },
+        { brand: "Citizen Quartz",   name: "AK5008 Quartz Moon Phase",price: "₱10,000", specs: "Quartz · Cal. 6324 · Two-Tone Case & Bracelet · Moon Phase · Date Display",   image: "Brand_assets/HD CITIZEN PICS/QUARTZ/IMG_3517.jpg",                                               alt: "Citizen AK5008 Quartz Moon Phase", inStock: true, detailUrl: "watch-ak5008.html" },
+        { brand: "Fossil x Minecraft",name: "LE1206 Grass Block",    price: "₱38,000",  specs: "44mm · Quartz Chronograph · 50m Water Resist · Leather Strap · Limited 1825pcs", image: "Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2050.jpg",                                    alt: "Fossil x Minecraft Grass Block",   inStock: true, detailUrl: "watch-le1206.html" },
+      ];
+
+      const inStock = watches.filter(w => w.inStock);
+      for (let i = inStock.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [inStock[i], inStock[j]] = [inStock[j], inStock[i]];
+      }
+      const picked = inStock.slice(0, 2);
+
+      function buildCard(w, delay) {
+        return `
+          <article class="watch-card reveal${delay ? ' d1' : ''} rounded-sm overflow-hidden group">
+            <div class="img-wrap relative overflow-hidden bg-knzo-elevated" style="aspect-ratio:4/5;">
+              <img src="${w.image}" alt="${w.alt}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/68 via-transparent to-transparent" style="transition:opacity 0.3s ease;"></div>
+              <div class="absolute inset-0" style="background:rgba(178,154,75,0.04);mix-blend-mode:multiply;"></div>
+              <div class="card-hover-btn absolute inset-0 flex items-center justify-center">
+                <a href="#contact" class="btn-gold px-7 py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-black font-semibold rounded-sm">Inquire Now</a>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-1">${w.brand}</p>
+              <div class="flex justify-between items-baseline mb-3">
+                <h3 class="font-display text-[1.35rem] font-light text-knzo-cream">${w.name}</h3>
+                <p class="font-display text-lg text-knzo-gold">${w.price}</p>
+              </div>
+              <p class="font-body text-[11px] text-knzo-silver/45 leading-[1.7] border-t border-white/5 pt-3">${w.specs}</p>
+              <a href="${w.detailUrl}" class="btn-ghost mt-5 w-full py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-cream rounded-sm flex items-center justify-center">View Details</a>
+            </div>
+          </article>`;
+      }
+
+      document.getElementById('rc-slot-1').outerHTML = buildCard(picked[0], false);
+      document.getElementById('rc-slot-2').outerHTML = buildCard(picked[1], true);
+    })();
   </script>
 </body>
 </html>
