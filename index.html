@@ -937,9 +937,9 @@
       }
       const picked = inStock.slice(0, 4);
 
-      function buildCard(w, delay) {
+      function buildCard(w, delay, extraClass = '') {
         return `
-          <article class="watch-card reveal${delay ? ' d1' : ''} rounded-sm overflow-hidden group">
+          <article class="watch-card reveal${delay ? ' d1' : ''}${extraClass ? ' ' + extraClass : ''} rounded-sm overflow-hidden group">
             <div class="img-wrap relative overflow-hidden bg-knzo-elevated" style="aspect-ratio:3/4;">
               <img src="${w.image}" alt="${w.alt}" class="w-full h-full object-cover">
               <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/68 via-transparent to-transparent" style="transition:opacity 0.3s ease;"></div>
@@ -963,7 +963,7 @@
       document.getElementById('rc-slot-1').outerHTML = buildCard(picked[0], false);
       document.getElementById('rc-slot-2').outerHTML = buildCard(picked[1], true);
       document.getElementById('rc-slot-3').outerHTML = buildCard(picked[2], false);
-      document.getElementById('rc-slot-4').outerHTML = buildCard(picked[3], true);
+      document.getElementById('rc-slot-4').outerHTML = buildCard(picked[3], true, 'md:hidden');
 
       const rcIo = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rcIo.unobserve(e.target); } });
