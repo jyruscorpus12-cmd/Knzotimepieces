@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KNZO Timepieces — Precision in Every Detail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            knzo: {
+              black:    '#0F0F0F',
+              dark:     '#131313',
+              surface:  '#1A1A1A',
+              elevated: '#222222',
+              gold:     '#B29A4B',
+              'gold-light': '#C9B06A',
+              'gold-dim':   '#7A6A30',
+              silver:   '#C4C4C4',
+              charcoal: '#414141',
+              cream:    '#F5F3EF',
+            }
+          },
+          fontFamily: {
+            display: ['"Libre Bodoni"', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Libre Bodoni';
+      font-weight: 100 900;
+      font-style: normal;
+      src: local('Inter'), local('Inter-Regular');
+      unicode-range: U+0025, U+002B, U+002C, U+002D, U+002E, U+0030-0039, U+20B1;
+    }
+    @font-face {
+      font-family: 'Libre Bodoni';
+      font-weight: 100 900;
+      font-style: italic;
+      src: local('Inter'), local('Inter-Regular');
+      unicode-range: U+0025, U+002B, U+002C, U+002D, U+002E, U+0030-0039, U+20B1;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: #0F0F0F;
+      color: #F5F3EF;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Grain ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── Gold gradient text ── */
+    .gold-text {
+      background: linear-gradient(135deg, #8A7535 0%, #C9B06A 35%, #B29A4B 65%, #7A6A30 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Buttons ── */
+    .btn-gold {
+      background: linear-gradient(135deg, #A8913F, #C9B06A 50%, #A8913F);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        0 4px 20px rgba(178,154,75,0.28),
+        0 1px 4px rgba(0,0,0,0.5);
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease, opacity 0.22s ease;
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        0 8px 28px rgba(178,154,75,0.38),
+        0 2px 8px rgba(0,0,0,0.6);
+    }
+    .btn-gold:active  { transform: translateY(0); }
+    .btn-gold:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
+
+    .btn-ghost {
+      border: 1px solid rgba(178,154,75,0.35);
+      transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-ghost:hover  { background: rgba(178,154,75,0.08); border-color: rgba(178,154,75,0.65); transform: translateY(-2px); }
+    .btn-ghost:active { transform: translateY(0); }
+    .btn-ghost:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; border-radius: 2px; }
+
+    /* ── Nav ── */
+    nav {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: rgba(15,15,15,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+    }
+    .nav-link {
+      color: rgba(245,243,239,0.55);
+      font-size: 0.825rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover       { color: #B29A4B; }
+    .nav-link:focus-visible { outline: 2px solid #B29A4B; outline-offset: 4px; border-radius: 2px; color: #B29A4B; }
+
+    /* ── Gold rule ── */
+    .gold-rule {
+      width: 44px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #B29A4B, transparent);
+    }
+
+    /* ── Hero radial bg ── */
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 70% 55% at 72% 50%, rgba(178,154,75,0.065) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 40% at 20% 75%, rgba(178,154,75,0.04)  0%, transparent 55%),
+        #0F0F0F;
+    }
+
+    /* ── Cards ── */
+    .watch-card {
+      background: #1A1A1A;
+      border: 1px solid rgba(255,255,255,0.048);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.45), 0 8px 36px rgba(0,0,0,0.32);
+      transition: transform 0.38s cubic-bezier(0.34,1.2,0.64,1), box-shadow 0.38s ease, border-color 0.38s ease;
+    }
+    .watch-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(178,154,75,0.18);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 20px 56px rgba(0,0,0,0.42);
+    }
+    .watch-card .img-wrap img {
+      transition: transform 0.65s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .watch-card:hover .img-wrap img { transform: scale(1.06); }
+
+    .card-hover-btn {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .watch-card:hover .card-hover-btn { opacity: 1; }
+
+    /* ── Unique find card ── */
+    .unique-card {
+      background: linear-gradient(135deg, #161616, #111111);
+      border: 1px solid rgba(178,154,75,0.15);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    .unique-card:hover {
+      border-color: rgba(178,154,75,0.32);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 60px rgba(178,154,75,0.04);
+    }
+
+    /* ── Carousel ── */
+    .carousel-img { opacity: 0; transition: opacity 0.5s ease; }
+    .carousel-img.active { opacity: 1; }
+    .carousel-btn {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(15,15,15,0.72);
+      border: 1px solid rgba(178,154,75,0.28);
+      border-radius: 2px;
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .carousel-btn:hover { background: rgba(178,154,75,0.15); border-color: rgba(178,154,75,0.55); }
+    .carousel-btn:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
+    .uf-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(178,154,75,0.28);
+      border: none; cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .uf-dot.active { background: #B29A4B; transform: scale(1.4); }
+
+    /* ── Unique indicator tags ── */
+    .unique-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #B29A4B;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid rgba(178,154,75,0.28);
+      border-radius: 2px;
+      background: rgba(178,154,75,0.07);
+    }
+
+    /* ── Rare Find pulse dot ── */
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+    .pulse-dot { animation: pulse 2s ease-in-out infinite; }
+
+    /* ── Testimonial ── */
+    .tcard {
+      background: #161616;
+      border: 1px solid rgba(255,255,255,0.045);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      transition: border-color 0.3s ease, transform 0.3s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    a.tcard:hover  { border-color: rgba(178,154,75,0.28); transform: translateY(-5px); }
+    a.tcard:active { transform: translateY(0); }
+    a.tcard:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
+
+    /* ── Marquee ── */
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 22s linear infinite; }
+
+    /* ── Fade-up (hero) ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.9s cubic-bezier(0.34,1.1,0.64,1) both; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.22s; }
+    .d3 { animation-delay: 0.36s; }
+    .d4 { animation-delay: 0.5s; }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.08s; }
+    .reveal.d2 { transition-delay: 0.18s; }
+    .reveal.d3 { transition-delay: 0.28s; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-4 flex items-center justify-between">
+    <a href="#" aria-label="KNZO Timepieces home">
+      <img src="Brand_assets/Z LOGO.png" alt="KNZO Timepieces" style="height: 44px; width: auto;">
+    </a>
+    <div class="hidden md:flex items-center gap-10">
+      <a href="catalog.html" class="nav-link">Collection</a>
+      <a href="#about"      class="nav-link">About</a>
+      <a href="#contact"    class="nav-link">Contact</a>
+    </div>
+    <a href="#contact" class="btn-gold hidden md:inline-block px-6 py-2.5 font-body text-[10px] tracking-[0.18em] uppercase text-knzo-black font-semibold rounded-sm">
+      Shop Now
+    </a>
+    <!-- Mobile hamburger -->
+    <button id="mob-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="15" viewBox="0 0 22 15" fill="none">
+        <rect width="22" height="2" rx="1" fill="#F5F3EF"/>
+        <rect y="6.5" width="15" height="2" rx="1" fill="#F5F3EF"/>
+        <rect y="13" width="22" height="2" rx="1" fill="#F5F3EF"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mob-menu" class="fixed inset-0 z-40 bg-knzo-black/96 flex flex-col items-center justify-center gap-10 translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+    <a href="catalog.html" class="nav-link text-lg" onclick="closeMob()">Collection</a>
+    <a href="#about"      class="nav-link text-lg" onclick="closeMob()">About</a>
+    <a href="#contact"    class="nav-link text-lg" onclick="closeMob()">Contact</a>
+    <a href="#contact"    class="btn-gold mt-4 px-10 py-3.5 font-body text-xs tracking-[0.2em] uppercase text-knzo-black font-semibold rounded-sm" onclick="closeMob()">Shop Now</a>
+  </div>
+
+  <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+  <section class="hero-bg min-h-screen flex items-center pt-20">
+    <div class="max-w-7xl mx-auto px-6 md:px-14 w-full grid md:grid-cols-2 gap-12 lg:gap-20 items-center py-20 md:py-28">
+
+      <!-- Copy -->
+      <div>
+        <p class="fade-up font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-5">
+          Filipino Luxury · Signature Timepieces
+        </p>
+        <h1 class="fade-up d1 font-display font-light leading-[0.9] tracking-[-0.03em] text-knzo-cream mb-6"
+            style="font-size: clamp(3.5rem, 8vw, 6.5rem);">
+          Time,<br>
+          <em class="gold-text not-italic">Mastered.</em>
+        </h1>
+        <p class="fade-up d2 font-body text-sm text-knzo-silver/65 leading-[1.75] max-w-[400px] mb-10">
+          Luxury you can trust, Time you can treasure.<br>Your trusted timepieces for every moment that matters.
+        </p>
+        <div class="fade-up d3 flex flex-wrap gap-4">
+          <a href="#collection" class="btn-gold px-8 py-3.5 font-body text-[10px] tracking-[0.2em] uppercase text-knzo-black font-semibold rounded-sm">
+            Explore Collection
+          </a>
+          <a href="#about" class="btn-ghost px-8 py-3.5 font-body text-[10px] tracking-[0.2em] uppercase text-knzo-cream rounded-sm">
+            Our Story
+          </a>
+        </div>
+
+        <!-- Stats strip -->
+        <div class="fade-up d4 flex gap-10 mt-14 pt-10 border-t border-white/5">
+          <div class="text-center">
+            <p class="font-display text-3xl font-light text-knzo-gold leading-none">100%</p>
+            <p class="font-body text-[10px] tracking-[0.15em] uppercase text-knzo-silver/40 mt-1">Authentic</p>
+          </div>
+          <div class="w-px bg-white/5"></div>
+          <div class="text-center">
+            <p class="font-display text-3xl font-light text-knzo-gold leading-none">Japan</p>
+            <p class="font-body text-[10px] tracking-[0.15em] uppercase text-knzo-silver/40 mt-1">Crafted</p>
+          </div>
+          <div class="w-px bg-white/5"></div>
+          <div class="text-center">
+            <p class="font-display text-3xl font-light text-knzo-gold leading-none">Est.</p>
+            <p class="font-body text-[10px] tracking-[0.15em] uppercase text-knzo-silver/40 mt-1">2025</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero image -->
+      <div class="fade-up d2 relative">
+        <div class="relative overflow-hidden rounded-sm" style="aspect-ratio: 1/1.05;">
+          <img
+            src="Brand_assets/SEIKO SSC813 PANDA V1/IMG_2025.jpg"
+            alt="Seiko Prospex SSC813 Panda Chronograph"
+            class="w-full h-full object-cover"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/65 via-transparent to-transparent"></div>
+          <div class="absolute inset-0" style="background: rgba(178,154,75,0.04); mix-blend-mode: multiply;"></div>
+          <!-- Label -->
+          <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+            <div>
+              <p class="font-body text-[9px] tracking-[0.2em] uppercase text-knzo-gold/70">Featured</p>
+              <p class="font-display text-lg font-light text-knzo-cream">SSC813 Panda</p>
+            </div>
+            <p class="font-display text-xl text-knzo-gold">₱27,500</p>
+          </div>
+        </div>
+        <!-- Corner deco -->
+        <div class="absolute -bottom-5 -right-5 w-28 h-28 border-r border-b border-knzo-gold/18 rounded-br-sm pointer-events-none"></div>
+        <div class="absolute -top-5 -left-5 w-16 h-16 border-l border-t border-knzo-gold/12 pointer-events-none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ COLLECTION ═══════════════════════════════ -->
+  <section id="collection" class="py-28 px-6 md:px-14">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="reveal text-center mb-20">
+        <p class="font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-4">Our Timepieces</p>
+        <h2 class="font-display font-light tracking-[-0.03em] text-knzo-cream" style="font-size: clamp(2.5rem,5vw,4rem);">
+          The Collection
+        </h2>
+        <div class="gold-rule mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-7">
+
+        <!-- ── Panda ── -->
+        <article class="watch-card reveal rounded-sm overflow-hidden group">
+          <div class="img-wrap relative overflow-hidden bg-knzo-elevated" style="aspect-ratio: 4/5;">
+            <img
+              src="Brand_assets/SEIKO SSC813 PANDA V1/IMG_2025.jpg"
+              alt="Seiko Prospex SSC813 Panda Chronograph"
+              class="w-full h-full object-cover"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/68 via-transparent to-transparent" style="transition: opacity 0.3s ease;"></div>
+            <div class="absolute inset-0" style="background: rgba(178,154,75,0.04); mix-blend-mode: multiply;"></div>
+            <div class="card-hover-btn absolute inset-0 flex items-center justify-center">
+              <a href="#contact" class="btn-gold px-7 py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-black font-semibold rounded-sm">
+                Inquire Now
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-1">Seiko Prospex</p>
+            <div class="flex justify-between items-baseline mb-3">
+              <h3 class="font-display text-[1.35rem] font-light text-knzo-cream">SSC813 Panda</h3>
+              <p class="font-display text-lg text-knzo-gold">₱27,500</p>
+            </div>
+            <p class="font-body text-[11px] text-knzo-silver/45 leading-[1.7] border-t border-white/5 pt-3">
+              Solar Chronograph · Tachymeter · Sapphire Crystal
+            </p>
+            <button class="btn-ghost mt-5 w-full py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-cream rounded-sm">
+              View Details
+            </button>
+          </div>
+        </article>
+
+        <!-- ── Lukia ── -->
+        <article class="watch-card reveal d1 rounded-sm overflow-hidden group">
+          <div class="img-wrap relative overflow-hidden bg-knzo-elevated" style="aspect-ratio: 4/5;">
+            <img
+              src="Brand_assets/SEIKO SSVM62 LUKIA/IMG_1644.jpg"
+              alt="Seiko SSVM62 Lukia Automatic"
+              class="w-full h-full object-cover"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/68 via-transparent to-transparent"></div>
+            <div class="absolute inset-0" style="background: rgba(178,154,75,0.04); mix-blend-mode: multiply;"></div>
+            <div class="card-hover-btn absolute inset-0 flex items-center justify-center">
+              <a href="#contact" class="btn-gold px-7 py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-black font-semibold rounded-sm">
+                Inquire Now
+              </a>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-1">Seiko Lukia</p>
+            <div class="flex justify-between items-baseline mb-3">
+              <h3 class="font-display text-[1.35rem] font-light text-knzo-cream">SSVM62</h3>
+              <p class="font-display text-lg text-knzo-gold">₱24,590</p>
+            </div>
+            <p class="font-body text-[11px] text-knzo-silver/45 leading-[1.7] border-t border-white/5 pt-3">
+              Mechanical Automatic · Rose Gold · Sapphire Crystal
+            </p>
+            <button class="btn-ghost mt-5 w-full py-2.5 font-body text-[10px] tracking-[0.16em] uppercase text-knzo-cream rounded-sm">
+              View Details
+            </button>
+          </div>
+        </article>
+
+        <!-- ── Explore All ── -->
+        <a href="catalog.html"
+           class="watch-card reveal d2 rounded-sm overflow-hidden group flex flex-col">
+          <div class="img-wrap relative overflow-hidden flex items-center justify-center" style="aspect-ratio: 4/5; background: linear-gradient(145deg, #141414, #111111);">
+            <div class="absolute inset-0" style="background: radial-gradient(ellipse 65% 55% at 50% 50%, rgba(178,154,75,0.08) 0%, transparent 68%);"></div>
+            <!-- Corner decorations -->
+            <div class="absolute top-7 left-7 w-12 h-12 border-l border-t border-knzo-gold/22 pointer-events-none"></div>
+            <div class="absolute bottom-7 right-7 w-12 h-12 border-r border-b border-knzo-gold/22 pointer-events-none"></div>
+            <div class="absolute top-7 right-7 w-6 h-6 border-r border-t border-knzo-gold/10 pointer-events-none"></div>
+            <div class="absolute bottom-7 left-7 w-6 h-6 border-l border-b border-knzo-gold/10 pointer-events-none"></div>
+            <!-- Center content -->
+            <div class="relative text-center px-8" style="transition: transform 0.38s cubic-bezier(0.34,1.2,0.64,1);">
+              <svg viewBox="0 0 52 52" fill="none" class="w-13 h-13 mx-auto mb-6" style="width:52px;height:52px;">
+                <circle cx="26" cy="26" r="21" stroke="#B29A4B" stroke-width="1.2"/>
+                <path d="M18 26h16M28 19l7 7-7 7" stroke="#B29A4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <p class="gold-text font-display font-light tracking-[-0.02em]" style="font-size: clamp(1.8rem, 3vw, 2.4rem);">Explore All</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-1">KNZO Timepieces</p>
+            <div class="flex justify-between items-baseline mb-3">
+              <h3 class="font-display text-[1.35rem] font-light text-knzo-cream">Full Catalog</h3>
+            </div>
+            <p class="font-body text-[11px] text-knzo-silver/45 leading-[1.7] border-t border-white/5 pt-3">
+              View all available timepieces
+            </p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ MARQUEE ═══════════════════════════════ -->
+  <div class="overflow-hidden border-y border-white/5 py-3" style="background: rgba(22,22,22,0.55);">
+    <div class="marquee-track flex gap-10 whitespace-nowrap" style="width: max-content;">
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+      <span class="font-body text-[24px] font-bold tracking-[0.12em] uppercase text-knzo-gold/55">KNZO Timepieces</span><span class="text-knzo-gold/20 mx-4 text-[20px]">·</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ ABOUT ═══════════════════════════════ -->
+  <section id="about" class="py-28 px-6 md:px-14 border-y border-white/5" style="background: rgba(26,26,26,0.4);">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+      <!-- Video side -->
+      <div class="reveal relative flex justify-center">
+        <div class="flex flex-col items-center gap-4 w-full max-w-[300px]">
+          <div id="about-video" class="relative overflow-hidden rounded-sm w-full" style="aspect-ratio: 9/16;">
+            <!-- Thumbnail -->
+            <img
+              id="about-thumb"
+              src="Brand_assets/tumbnail Vlog #27.jpeg"
+              alt="KNZO Vlog #27 — Watch Transaction"
+              class="absolute inset-0 w-full h-full object-cover"
+              style="transition: opacity 0.5s ease;"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/60 via-transparent to-transparent pointer-events-none"></div>
+            <!-- Play button -->
+            <div id="about-play" class="absolute inset-0 flex items-center justify-center pointer-events-none" style="transition: opacity 0.5s ease;">
+              <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background: rgba(178,154,75,0.2); backdrop-filter: blur(8px); border: 1px solid rgba(178,154,75,0.35);">
+                <svg viewBox="0 0 24 24" fill="none" class="w-6 h-6 ml-1">
+                  <path d="M8 5l11 7-11 7V5z" fill="#B29A4B"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Vlog label -->
+            <div class="absolute top-4 left-4 pointer-events-none">
+              <span class="font-body text-[9px] tracking-[0.2em] uppercase px-2 py-1 rounded-sm" style="background: rgba(178,154,75,0.18); color: #B29A4B; border: 1px solid rgba(178,154,75,0.3);">Vlog #27</span>
+            </div>
+          </div>
+          <a href="https://www.tiktok.com/@jkcorpusofficial/video/7637101816454319380" target="_blank" rel="noopener noreferrer"
+             class="font-body text-[9px] tracking-[0.18em] uppercase text-knzo-gold/50 hover:text-knzo-gold" style="transition: color 0.2s ease;">
+            Watch on TikTok →
+          </a>
+        </div>
+      </div>
+
+      <!-- Text side -->
+      <div class="reveal d1">
+        <p class="font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-6">Behind Every Transaction</p>
+        <h2 class="font-display font-light tracking-[-0.03em] text-knzo-cream leading-[1.05] mb-7"
+            style="font-size: clamp(2.2rem,4.5vw,3.5rem);">
+          We Document<br><em class="gold-text not-italic">Everything.</em>
+        </h2>
+        <div class="gold-rule mb-8"></div>
+        <p class="font-body text-sm text-knzo-silver/60 leading-[1.8] mb-5">
+          From the moment we source a watch to the day it lands on your wrist — we film it all. Every purchase, every inspection, every sale is documented on our TikTok, Instagram, and Facebook.
+        </p>
+        <p class="font-body text-sm text-knzo-silver/60 leading-[1.8] mb-10">
+          No hidden markups. No mystery. Just real transactions, on camera, every time. That's how we've built trust with our community — one vlog at a time.
+        </p>
+
+        <!-- Stats strip -->
+        <div class="flex gap-8 mb-10 pt-8 border-t border-white/5">
+          <div>
+            <p class="font-display text-3xl font-light text-knzo-gold leading-none">50+</p>
+            <p class="font-body text-[10px] tracking-[0.15em] uppercase text-knzo-silver/40 mt-1">Watches Sold</p>
+          </div>
+          <div class="w-px bg-white/5"></div>
+          <div>
+            <p class="font-display text-3xl font-light text-knzo-gold leading-none">1k+</p>
+            <p class="font-body text-[10px] tracking-[0.15em] uppercase text-knzo-silver/40 mt-1">Followers</p>
+          </div>
+          <div class="w-px bg-white/5"></div>
+          <div>
+            <p class="font-display text-3xl font-light text-knzo-gold leading-none">100%</p>
+            <p class="font-body text-[10px] tracking-[0.15em] uppercase text-knzo-silver/40 mt-1">Documented</p>
+          </div>
+        </div>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-4">
+          <a href="https://www.tiktok.com/@jkcorpusofficial" target="_blank" rel="noopener noreferrer"
+             class="btn-gold px-8 py-3.5 font-body text-[10px] tracking-[0.2em] uppercase text-knzo-black font-semibold rounded-sm inline-flex items-center gap-2">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5" style="flex-shrink:0;">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.31 6.31 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.88a8.24 8.24 0 0 0 4.82 1.55V7a4.85 4.85 0 0 1-1.05-.31z"/>
+            </svg>
+            TikTok
+          </a>
+          <a href="https://www.facebook.com/jimmy.suproc" target="_blank" rel="noopener noreferrer"
+             class="btn-ghost px-8 py-3.5 font-body text-[10px] tracking-[0.2em] uppercase text-knzo-cream rounded-sm inline-flex items-center gap-2">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5" style="flex-shrink:0;">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Facebook
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ UNIQUE FINDS ═══════════════════════════════ -->
+  <section id="unique-finds" class="py-28 px-6 md:px-14">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="reveal text-center mb-20">
+        <p class="font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-4">Rare &amp; Limited</p>
+        <h2 class="font-display font-light tracking-[-0.03em] text-knzo-cream" style="font-size: clamp(2.5rem,5vw,4rem);">
+          Unique Finds
+        </h2>
+        <div class="gold-rule mx-auto mt-6"></div>
+      </div>
+
+      <!-- Featured unique watch -->
+      <div class="unique-card reveal rounded-sm overflow-hidden grid md:grid-cols-[3fr,2fr]">
+
+        <!-- Carousel side -->
+        <div class="relative overflow-hidden" style="min-height: 480px;">
+          <div id="uf-carousel" class="absolute inset-0">
+            <img src="Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2050.jpg" alt="Fossil x Minecraft Grass Block" class="carousel-img active absolute inset-0 w-full h-full object-cover">
+            <img src="Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2052.jpg" alt="Fossil x Minecraft Grass Block" class="carousel-img absolute inset-0 w-full h-full object-cover">
+            <img src="Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2034.jpg" alt="Fossil x Minecraft Grass Block" class="carousel-img absolute inset-0 w-full h-full object-cover">
+            <img src="Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2040.jpg" alt="Fossil x Minecraft Grass Block" class="carousel-img absolute inset-0 w-full h-full object-cover">
+            <img src="Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2041.jpg" alt="Fossil x Minecraft Grass Block" class="carousel-img absolute inset-0 w-full h-full object-cover">
+            <img src="Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2048.jpg" alt="Fossil x Minecraft Grass Block" class="carousel-img absolute inset-0 w-full h-full object-cover">
+            <img src="Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2049.jpg" alt="Fossil x Minecraft Grass Block" class="carousel-img absolute inset-0 w-full h-full object-cover">
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/55 to-transparent pointer-events-none"></div>
+          <div class="absolute inset-0 hidden md:block pointer-events-none" style="background: linear-gradient(to right, transparent 55%, #111111);"></div>
+          <!-- Rare Find badge -->
+          <div class="absolute top-6 left-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-sm" style="background: rgba(178,154,75,0.15); border: 1px solid rgba(178,154,75,0.4); backdrop-filter: blur(8px);">
+            <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-knzo-gold inline-block"></span>
+            <span class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold">Rare Find</span>
+          </div>
+          <!-- Prev / Next -->
+          <button id="uf-prev" class="carousel-btn absolute left-4 top-1/2 -translate-y-1/2" aria-label="Previous photo">
+            <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5"><path d="M15 18l-6-6 6-6" stroke="#B29A4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button id="uf-next" class="carousel-btn absolute right-4 top-1/2 -translate-y-1/2" aria-label="Next photo">
+            <svg viewBox="0 0 24 24" fill="none" class="w-5 h-5"><path d="M9 18l6-6-6-6" stroke="#B29A4B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <!-- Dots -->
+          <div id="uf-dots" class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2 pointer-events-none" style="pointer-events: all;"></div>
+        </div>
+
+        <!-- Details side -->
+        <div class="p-10 md:p-14 flex flex-col justify-center">
+          <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-2">Fossil × Minecraft</p>
+          <h3 class="font-display font-light tracking-[-0.02em] text-knzo-cream leading-[1.1] mb-1"
+              style="font-size: clamp(1.8rem,3vw,2.6rem);">"Grass Block"</h3>
+          <p class="font-body text-[11px] tracking-[0.12em] uppercase text-knzo-silver/45 mb-1">Limited Edition Chronograph</p>
+          <p class="font-body text-[9px] tracking-[0.18em] uppercase text-knzo-gold/40 mb-5">Ref. LE1206</p>
+          <div class="flex items-baseline gap-3 mb-6">
+            <p class="font-display text-2xl text-knzo-gold">₱38,000</p>
+            <p class="font-body text-[9px] tracking-[0.12em] uppercase text-knzo-silver/35">Slightly Negotiable</p>
+          </div>
+          <div class="gold-rule mb-8"></div>
+
+          <!-- Uniqueness indicators -->
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="unique-tag">1 of 1,825 Worldwide</span>
+            <span class="unique-tag">Fossil × Minecraft Collab</span>
+            <span class="unique-tag">9.9/10 Pristine Condition</span>
+            <span class="unique-tag">Intact Stickers</span>
+            <span class="unique-tag">Sealed DLC Included</span>
+            <span class="unique-tag">Original Chest Box</span>
+            <span class="unique-tag">Local Release</span>
+            <span class="unique-tag">Protective Film On</span>
+          </div>
+
+          <p class="font-body text-sm text-knzo-silver/55 leading-[1.8] mb-10">
+            One of only 1,825 pieces produced worldwide. This collector's grail features a 3D Grass Block textured dial, Iron Tool hands (pickaxe & sword), a holographic lenticular case back, and comes complete with its original Minecraft Chest packaging and a sealed "Time Well Played" DLC reward — untouched, exactly as it left the factory.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="#contact" class="btn-gold px-8 py-3.5 font-body text-[10px] tracking-[0.2em] uppercase text-knzo-black font-semibold rounded-sm">
+              Inquire Now
+            </a>
+            <a href="#contact" class="btn-ghost px-8 py-3.5 font-body text-[10px] tracking-[0.2em] uppercase text-knzo-cream rounded-sm">
+              Learn More
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ TESTIMONIALS ═══════════════════════════════ -->
+  <section class="py-28 px-6 md:px-14 border-y border-white/5" style="background: rgba(22,22,22,0.6);">
+    <div class="max-w-5xl mx-auto">
+      <div class="reveal text-center mb-20">
+        <p class="font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-4">Client Stories</p>
+        <h2 class="font-display font-light tracking-[-0.03em] text-knzo-cream" style="font-size: clamp(2.5rem,5vw,4rem);">
+          Worn with Pride
+        </h2>
+        <div class="gold-rule mx-auto mt-6"></div>
+      </div>
+
+      <!-- Photo cards — top row -->
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+
+        <a href="https://www.facebook.com/share/p/1BAVLDHzF2/" target="_blank" rel="noopener noreferrer"
+           class="tcard reveal p-8 rounded-sm block">
+          <div class="flex items-center justify-between mb-5">
+            <p class="text-knzo-gold text-sm tracking-wider">★★★★★</p>
+            <div class="flex items-center gap-1.5">
+              <svg viewBox="0 0 24 24" fill="#1877F2" class="w-3.5 h-3.5"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span class="font-body text-[9px] tracking-[0.12em] uppercase text-knzo-silver/35">Facebook</span>
+            </div>
+          </div>
+          <p class="font-display text-xl font-light text-knzo-cream/88 leading-[1.65] mb-5 italic">
+            "Very fast transaction. Very accommodating. Will surely purchase another watch from him. It looks brand new with complete inclusions (box, manual, card). Worth every penny. I trust this guy!"
+          </p>
+          <div class="overflow-hidden rounded-sm mb-7" style="max-height: 220px;">
+            <img src="Brand_assets/Facebook Reviews/Kyle Espancho FB Review.jpg" alt="Kyle Espancho Facebook Review" class="w-full h-full object-cover object-top">
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style="background: rgba(178,154,75,0.18);">
+              <span class="font-display text-knzo-gold">K</span>
+            </div>
+            <div>
+              <p class="font-body text-xs text-knzo-cream font-medium">Kyle Espancho</p>
+              <p class="font-body text-[9px] tracking-[0.12em] text-knzo-silver/35 uppercase mt-0.5">March 2, 2025</p>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://www.facebook.com/share/p/17FU2nwhAu/" target="_blank" rel="noopener noreferrer"
+           class="tcard reveal d1 p-8 rounded-sm block">
+          <div class="flex items-center justify-between mb-5">
+            <p class="text-knzo-gold text-sm tracking-wider">★★★★★</p>
+            <div class="flex items-center gap-1.5">
+              <svg viewBox="0 0 24 24" fill="#1877F2" class="w-3.5 h-3.5"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span class="font-body text-[9px] tracking-[0.12em] uppercase text-knzo-silver/35">Facebook</span>
+            </div>
+          </div>
+          <p class="font-display text-xl font-light text-knzo-cream/88 leading-[1.65] mb-5 italic">
+            "Legit seller 100% — mabilis ang response at maayos kausap."
+          </p>
+          <div class="overflow-hidden rounded-sm mb-7" style="max-height: 220px;">
+            <img src="Brand_assets/Facebook Reviews/Douglas Gogorza FB Review.jpg" alt="Douglas Gogorza Facebook Review" class="w-full h-full object-cover object-top">
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style="background: rgba(178,154,75,0.18);">
+              <span class="font-display text-knzo-gold">D</span>
+            </div>
+            <div>
+              <p class="font-body text-xs text-knzo-cream font-medium">Douglas Gogorza</p>
+              <p class="font-body text-[9px] tracking-[0.12em] text-knzo-silver/35 uppercase mt-0.5">May 2, 2025</p>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Compact text-only cards — bottom row -->
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <a href="https://www.facebook.com/share/p/1JGa22JZU3/" target="_blank" rel="noopener noreferrer"
+           class="tcard reveal p-5 rounded-sm block">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-knzo-gold text-xs tracking-wider">★★★★★</p>
+            <div class="flex items-center gap-1.5">
+              <svg viewBox="0 0 24 24" fill="#1877F2" class="w-3 h-3"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span class="font-body text-[9px] tracking-[0.12em] uppercase text-knzo-silver/35">Facebook</span>
+            </div>
+          </div>
+          <p class="font-display text-base font-light text-knzo-cream/88 leading-[1.6] mb-4 italic">
+            "Great quality watches and very accommodating seller. Highly recommend!"
+          </p>
+          <p class="font-body text-[9px] tracking-[0.12em] uppercase text-knzo-silver/35">Nathaniel Canlas &nbsp;·&nbsp; March 6, 2025</p>
+        </a>
+
+        <a href="https://www.facebook.com/share/p/1CctvmH1Bj/" target="_blank" rel="noopener noreferrer"
+           class="tcard reveal d1 p-5 rounded-sm block">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-knzo-gold text-xs tracking-wider">★★★★★</p>
+            <div class="flex items-center gap-1.5">
+              <svg viewBox="0 0 24 24" fill="#1877F2" class="w-3 h-3"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              <span class="font-body text-[9px] tracking-[0.12em] uppercase text-knzo-silver/35">Facebook</span>
+            </div>
+          </div>
+          <p class="font-display text-base font-light text-knzo-cream/88 leading-[1.6] mb-4 italic">
+            "Best experience! Solid watch."
+          </p>
+          <p class="font-body text-[9px] tracking-[0.12em] uppercase text-knzo-silver/35">Kim Cruza &nbsp;·&nbsp; April 22, 2025</p>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ CTA ═══════════════════════════════ -->
+  <section id="contact" class="py-32 px-6 md:px-14 text-center">
+    <div class="max-w-2xl mx-auto reveal">
+      <p class="font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-6">Ready to Own One?</p>
+      <h2 class="font-display font-light tracking-[-0.03em] text-knzo-cream leading-[1.05] mb-6"
+          style="font-size: clamp(2.8rem,6vw,5rem);">
+        Your Next Timepiece<br><em class="gold-text not-italic">Awaits.</em>
+      </h2>
+      <div class="gold-rule mx-auto mb-8"></div>
+      <p class="font-body text-sm text-knzo-silver/55 leading-[1.8] mb-10">
+        Reach out to us to inquire, reserve, or learn more about any piece in our collection. We respond within 24 hours.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="https://www.facebook.com/KNZOTP" target="_blank" rel="noopener noreferrer"
+           class="btn-gold px-10 py-4 font-body text-[10px] tracking-[0.22em] uppercase text-knzo-black font-semibold rounded-sm inline-block">
+          Message Us on Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="border-t border-white/5 py-10 px-6 md:px-14">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <img src="Brand_assets/Z LOGO.png" alt="KNZO Timepieces" style="height: 44px; width: auto; opacity: 0.75;">
+      <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-silver/25 text-center">
+        © 2025 KNZO Timepieces &nbsp;·&nbsp; Precision in Every Detail
+      </p>
+      <div class="flex gap-8">
+        <a href="catalog.html" class="nav-link">Collection</a>
+        <a href="#about"      class="nav-link">About</a>
+        <a href="#contact"    class="nav-link">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Mobile menu ──
+    const mobBtn  = document.getElementById('mob-btn');
+    const mobMenu = document.getElementById('mob-menu');
+    mobBtn.addEventListener('click', () => {
+      const open = mobMenu.classList.toggle('translate-x-full');
+      mobBtn.setAttribute('aria-expanded', String(!open));
+    });
+    function closeMob() { mobMenu.classList.add('translate-x-full'); mobBtn.setAttribute('aria-expanded','false'); }
+
+    // ── Scroll reveal ──
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ── Unique Finds carousel ──
+    (function () {
+      const imgs   = document.querySelectorAll('#uf-carousel .carousel-img');
+      const dotsEl = document.getElementById('uf-dots');
+      let current  = 0;
+      let timer;
+
+      imgs.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'uf-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Photo ' + (i + 1));
+        dot.addEventListener('click', () => { clearInterval(timer); goTo(i); startTimer(); });
+        dotsEl.appendChild(dot);
+      });
+
+      function goTo(n) {
+        imgs[current].classList.remove('active');
+        dotsEl.children[current].classList.remove('active');
+        current = (n + imgs.length) % imgs.length;
+        imgs[current].classList.add('active');
+        dotsEl.children[current].classList.add('active');
+      }
+
+      document.getElementById('uf-next').addEventListener('click', () => { clearInterval(timer); goTo(current + 1); startTimer(); });
+      document.getElementById('uf-prev').addEventListener('click', () => { clearInterval(timer); goTo(current - 1); startTimer(); });
+
+      const carousel = document.getElementById('uf-carousel');
+      carousel.addEventListener('mouseenter', () => clearInterval(timer));
+      carousel.addEventListener('mouseleave', () => { if (inView) startTimer(); });
+
+      let inView = false;
+      function startTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 2800); }
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          inView = e.isIntersecting;
+          if (inView) startTimer(); else clearInterval(timer);
+        });
+      }, { threshold: 0.3 });
+      sectionObserver.observe(document.getElementById('unique-finds'));
+    })();
+
+    // ── About video: autoplay when section in view, reset when out ──
+    const aboutVideoContainer = document.getElementById('about-video');
+    if (aboutVideoContainer) {
+      const thumb    = document.getElementById('about-thumb');
+      const playIcon = document.getElementById('about-play');
+      let videoIframe = null;
+      let loadTimer;
+
+      function loadVideo() {
+        if (videoIframe) return;
+        if (thumb)    thumb.style.opacity    = '0';
+        if (playIcon) playIcon.style.opacity = '0';
+        loadTimer = setTimeout(() => {
+          videoIframe = document.createElement('iframe');
+          videoIframe.src = 'https://www.tiktok.com/embed/v2/7637101816454319380?autoplay=1';
+          videoIframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+          videoIframe.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share';
+          videoIframe.allowFullscreen = true;
+          videoIframe.addEventListener('load', () => {
+            setTimeout(() => {
+              try { videoIframe.contentWindow.postMessage(JSON.stringify({ type: 'play' }), '*'); } catch(e) {}
+            }, 800);
+          });
+          aboutVideoContainer.appendChild(videoIframe);
+        }, 400);
+      }
+
+      function unloadVideo() {
+        clearTimeout(loadTimer);
+        if (videoIframe) { videoIframe.remove(); videoIframe = null; }
+        if (thumb)    thumb.style.opacity    = '1';
+        if (playIcon) playIcon.style.opacity = '1';
+      }
+
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) loadVideo(); else unloadVideo(); });
+      }, { threshold: 0.4 });
+
+      videoObserver.observe(aboutVideoContainer);
+    }
+  </script>
+</body>
+</html>

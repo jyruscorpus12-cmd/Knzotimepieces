@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Collection — KNZO Timepieces</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            knzo: {
+              black:    '#0F0F0F',
+              dark:     '#131313',
+              surface:  '#1A1A1A',
+              elevated: '#222222',
+              gold:     '#B29A4B',
+              'gold-light': '#C9B06A',
+              'gold-dim':   '#7A6A30',
+              silver:   '#C4C4C4',
+              charcoal: '#414141',
+              cream:    '#F5F3EF',
+            }
+          },
+          fontFamily: {
+            display: ['"Libre Bodoni"', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Libre Bodoni';
+      font-weight: 100 900;
+      font-style: normal;
+      src: local('Inter'), local('Inter-Regular');
+      unicode-range: U+0025, U+002B, U+002C, U+002D, U+002E, U+0030-0039, U+20B1;
+    }
+    @font-face {
+      font-family: 'Libre Bodoni';
+      font-weight: 100 900;
+      font-style: italic;
+      src: local('Inter'), local('Inter-Regular');
+      unicode-range: U+0025, U+002B, U+002C, U+002D, U+002E, U+0030-0039, U+20B1;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0F0F0F;
+      color: #F5F3EF;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Grain ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── Gold gradient text ── */
+    .gold-text {
+      background: linear-gradient(135deg, #8A7535 0%, #C9B06A 35%, #B29A4B 65%, #7A6A30 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Buttons ── */
+    .btn-gold {
+      background: linear-gradient(135deg, #A8913F, #C9B06A 50%, #A8913F);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.12),
+        0 4px 20px rgba(178,154,75,0.28),
+        0 1px 4px rgba(0,0,0,0.5);
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease, opacity 0.22s ease;
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.18),
+        0 8px 28px rgba(178,154,75,0.38),
+        0 2px 8px rgba(0,0,0,0.6);
+    }
+    .btn-gold:active  { transform: translateY(0); }
+    .btn-gold:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
+
+    .btn-ghost {
+      border: 1px solid rgba(178,154,75,0.35);
+      transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-ghost:hover  { background: rgba(178,154,75,0.08); border-color: rgba(178,154,75,0.65); transform: translateY(-2px); }
+    .btn-ghost:active { transform: translateY(0); }
+    .btn-ghost:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; border-radius: 2px; }
+
+    /* ── Nav ── */
+    nav {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: rgba(15,15,15,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+    }
+    .nav-link {
+      color: rgba(245,243,239,0.55);
+      font-size: 0.825rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover         { color: #B29A4B; }
+    .nav-link.active        { color: #B29A4B; }
+    .nav-link:focus-visible { outline: 2px solid #B29A4B; outline-offset: 4px; border-radius: 2px; color: #B29A4B; }
+
+    /* ── Gold rule ── */
+    .gold-rule {
+      width: 44px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #B29A4B, transparent);
+    }
+
+    /* ── Cards ── */
+    .watch-card {
+      background: #1A1A1A;
+      border: 1px solid rgba(255,255,255,0.048);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.45), 0 8px 36px rgba(0,0,0,0.32);
+      transition: transform 0.38s cubic-bezier(0.34,1.2,0.64,1), box-shadow 0.38s ease, border-color 0.38s ease;
+    }
+    .watch-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(178,154,75,0.18);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.55), 0 20px 56px rgba(0,0,0,0.42);
+    }
+    .watch-card .img-wrap img {
+      transition: transform 0.65s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .watch-card:hover .img-wrap img { transform: scale(1.06); }
+
+    .card-hover-btn {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .watch-card:hover .card-hover-btn { opacity: 1; }
+
+    /* ── Filter tabs ── */
+    .filter-tab {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,243,239,0.4);
+      padding: 0.5rem 1.25rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 2px;
+      background: transparent;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+    .filter-tab:hover { color: #B29A4B; border-color: rgba(178,154,75,0.3); }
+    .filter-tab.active {
+      color: #0F0F0F;
+      background: linear-gradient(135deg, #A8913F, #C9B06A 50%, #A8913F);
+      border-color: transparent;
+      box-shadow: 0 2px 12px rgba(178,154,75,0.25);
+    }
+    .filter-tab:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
+
+    /* ── Search ── */
+    .search-input {
+      background: rgba(26,26,26,0.8);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 2px;
+      color: #F5F3EF;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      padding: 0.55rem 1rem 0.55rem 2.5rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+      width: 220px;
+    }
+    .search-input::placeholder { color: rgba(196,196,196,0.3); }
+    .search-input:focus { border-color: rgba(178,154,75,0.4); box-shadow: 0 0 0 3px rgba(178,154,75,0.08); }
+
+    /* ── Empty state ── */
+    .empty-state         { display: none; }
+    .empty-state.visible { display: flex; }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .reveal.in  { opacity: 1; transform: translateY(0); }
+    .reveal.d1  { transition-delay: 0.08s; }
+    .reveal.d2  { transition-delay: 0.18s; }
+
+    /* ── Fade-up ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up    { animation: fadeUp 0.8s cubic-bezier(0.34,1.1,0.64,1) both; }
+    .fu-d1      { animation-delay: 0.1s; }
+    .fu-d2      { animation-delay: 0.22s; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Mobile 2-col card compacting ── */
+    @media (max-width: 639px) {
+      #watch-grid .watch-card > div:last-child { padding: 0.6rem 0.65rem 0.7rem; }
+      #watch-grid .watch-card h3 { font-size: 0.85rem; }
+      #watch-grid .watch-card .font-display.text-lg { font-size: 0.82rem; }
+      #watch-grid .watch-card p.font-body,
+      #watch-grid .watch-card button { display: none; }
+    }
+
+    /* ── Hover image swap ── */
+    .hover-img         { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; }
+    .hover-smooth      { transition: opacity 0.6s ease; }
+    .hover-instant     { transition: opacity 0.06s ease; }
+    .watch-card:hover .hover-img { opacity: 1; }
+    .watch-card.touch-active .hover-img { opacity: 1; transition: opacity 0.2s ease; }
+
+    /* ── Sidebar ── */
+    .filter-sidebar {
+      width: 252px;
+      flex-shrink: 0;
+      background: rgba(20,20,20,0.85);
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 2px;
+      padding: 1.5rem;
+      align-self: flex-start;
+    }
+    .filter-sidebar.is-sticky {
+      position: sticky;
+      top: 88px;
+    }
+    .sidebar-section {
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .sidebar-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .sidebar-heading {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(178,154,75,0.6);
+      margin-bottom: 0.8rem;
+    }
+
+    /* ── Filter checkboxes ── */
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      padding: 0.28rem 0;
+    }
+    .filter-checkbox input[type="checkbox"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 1px solid rgba(178,154,75,0.28);
+      border-radius: 2px;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .filter-checkbox input[type="checkbox"]:checked {
+      background: #B29A4B;
+      border-color: #B29A4B;
+    }
+    .filter-checkbox input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 1px;
+      width: 5px;
+      height: 8px;
+      border: 1.5px solid #0F0F0F;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .filter-checkbox input[type="checkbox"]:focus-visible { outline: 2px solid #B29A4B; outline-offset: 2px; }
+    .filter-checkbox span {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(245,243,239,0.5);
+      transition: color 0.2s ease;
+    }
+    .filter-checkbox:hover span,
+    .filter-checkbox input:checked ~ span { color: rgba(245,243,239,0.85); }
+
+    /* ── Sort select ── */
+    .filter-select {
+      width: 100%;
+      background: rgba(26,26,26,0.9);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 2px;
+      color: rgba(245,243,239,0.65);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.03em;
+      padding: 0.5rem 2rem 0.5rem 0.75rem;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23B29A4B' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+    }
+    .filter-select:focus { border-color: rgba(178,154,75,0.4); }
+    .filter-select option { background: #1A1A1A; color: #F5F3EF; }
+
+    /* ── Dual range slider ── */
+    .range-wrap {
+      position: relative;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+    .range-wrap input[type="range"] {
+      position: absolute;
+      width: 100%;
+      pointer-events: none;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      height: 4px;
+      outline: none;
+    }
+    .range-wrap input[type="range"]::-webkit-slider-thumb {
+      pointer-events: all;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 17px;
+      height: 17px;
+      background: linear-gradient(135deg, #A8913F, #C9B06A);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #0F0F0F;
+      box-shadow: 0 0 0 1px rgba(178,154,75,0.45), 0 2px 8px rgba(0,0,0,0.6);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .range-wrap input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
+      box-shadow: 0 0 0 2px rgba(178,154,75,0.6), 0 4px 14px rgba(178,154,75,0.28);
+    }
+    .range-wrap input[type="range"]::-moz-range-thumb {
+      pointer-events: all;
+      width: 17px;
+      height: 17px;
+      background: linear-gradient(135deg, #A8913F, #C9B06A);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #0F0F0F;
+      box-shadow: 0 0 0 1px rgba(178,154,75,0.45);
+    }
+    .range-track {
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 1px;
+      pointer-events: none;
+    }
+    .range-fill {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, #A8913F, #C9B06A);
+      border-radius: 1px;
+      pointer-events: none;
+    }
+    .price-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0.6rem;
+    }
+    .price-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      color: rgba(178,154,75,0.75);
+      letter-spacing: 0.03em;
+    }
+
+    /* ── Reset button ── */
+    .reset-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(178,154,75,0.4);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+    .reset-btn:hover { color: #B29A4B; }
+
+    /* ── Mobile filter toggle button ── */
+    .filter-toggle-btn {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(26,26,26,0.9);
+      border: 1px solid rgba(178,154,75,0.22);
+      border-radius: 2px;
+      color: rgba(245,243,239,0.65);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .filter-toggle-btn:hover { border-color: rgba(178,154,75,0.5); color: #B29A4B; }
+    .filter-toggle-btn:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
+    .filter-badge {
+      background: #B29A4B;
+      color: #0F0F0F;
+      font-size: 0.58rem;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    /* ── Drawer overlay ── */
+    .drawer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 100;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+    .drawer-overlay.open { display: block; }
+
+    /* ── Mobile: sidebar becomes fixed drawer ── */
+    @media (max-width: 768px) {
+      .filter-toggle-btn { display: flex; }
+      .filter-sidebar {
+        position: fixed;
+        left: 0; top: 0; bottom: 0;
+        width: min(288px, 85vw);
+        z-index: 101;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        transform: translateX(-100%);
+        transition: transform 0.32s cubic-bezier(0.34,1.1,0.64,1);
+        background: #141414;
+        border: none;
+        border-right: 1px solid rgba(178,154,75,0.1);
+        border-radius: 0;
+        padding-top: 5rem;
+      }
+      .filter-sidebar.drawer-open { transform: translateX(0); }
+    }
+    .drawer-close-btn {
+      display: none;
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 2px;
+      color: rgba(245,243,239,0.45);
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+      flex-shrink: 0;
+    }
+    .drawer-close-btn:hover { color: #B29A4B; border-color: rgba(178,154,75,0.3); }
+    @media (max-width: 768px) { .drawer-close-btn { display: flex; } }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-4 flex items-center justify-between">
+    <a href="index.html" aria-label="KNZO Timepieces home">
+      <img src="Brand_assets/Z LOGO.png" alt="KNZO Timepieces" style="height: 44px; width: auto;">
+    </a>
+    <div class="hidden md:flex items-center gap-10">
+      <a href="catalog.html" class="nav-link active">Collection</a>
+      <a href="index.html#about"   class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </div>
+    <a href="index.html#contact" class="btn-gold hidden md:inline-block px-6 py-2.5 font-body text-[10px] tracking-[0.18em] uppercase text-knzo-black font-semibold rounded-sm">
+      Shop Now
+    </a>
+    <button id="mob-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="15" viewBox="0 0 22 15" fill="none">
+        <rect width="22" height="2" rx="1" fill="#F5F3EF"/>
+        <rect y="6.5" width="15" height="2" rx="1" fill="#F5F3EF"/>
+        <rect y="13" width="22" height="2" rx="1" fill="#F5F3EF"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mob-menu" class="fixed inset-0 z-40 bg-knzo-black/96 flex flex-col items-center justify-center gap-10 translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+    <a href="catalog.html" class="nav-link text-lg active" onclick="closeMob()">Collection</a>
+    <a href="index.html#about"   class="nav-link text-lg" onclick="closeMob()">About</a>
+    <a href="index.html#contact" class="nav-link text-lg" onclick="closeMob()">Contact</a>
+    <a href="index.html#contact" class="btn-gold mt-4 px-10 py-3.5 font-body text-xs tracking-[0.2em] uppercase text-knzo-black font-semibold rounded-sm" onclick="closeMob()">Shop Now</a>
+  </div>
+
+  <!-- ═══════════════════════════════ PAGE HEADER ═══════════════════════════════ -->
+  <section class="pt-36 pb-10 px-6 md:px-14 text-center">
+    <div class="max-w-7xl mx-auto">
+      <p class="fade-up font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-4">KNZO Timepieces</p>
+      <h1 class="fade-up fu-d1 font-display font-light tracking-[-0.03em] text-knzo-cream" style="font-size: clamp(2.5rem,5vw,4rem);">
+        The Collection
+      </h1>
+      <div class="gold-rule mx-auto mt-6 fade-up fu-d2"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TOP BAR (search + mobile filter button) ═══════════════════ -->
+  <section class="py-5 px-6 md:px-14 border-b border-white/5" style="background: rgba(20,20,20,0.6);">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
+      <div class="flex items-center gap-4">
+        <button id="filter-toggle" class="filter-toggle-btn" aria-label="Open filters" aria-expanded="false">
+          <svg width="14" height="11" viewBox="0 0 14 11" fill="none">
+            <path d="M1 1h12M3 5.5h8M5.5 10h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+          Filters
+          <span id="filter-badge" class="filter-badge" style="display:none">0</span>
+        </button>
+        <span id="result-count" class="font-body text-[10px] tracking-[0.18em] uppercase text-knzo-silver/35"></span>
+      </div>
+      <div class="relative">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="5.5" cy="5.5" r="4.5" stroke="rgba(178,154,75,0.5)" stroke-width="1.2"/>
+          <path d="M9 9l3.5 3.5" stroke="rgba(178,154,75,0.5)" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <input id="search-input" type="text" class="search-input" placeholder="Search watches…" autocomplete="off">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ MAIN CONTENT ═══════════════════ -->
+  <section class="py-12 px-6 md:px-14">
+    <div class="max-w-7xl mx-auto flex gap-8 items-start">
+
+      <!-- ── Sidebar ── -->
+      <aside class="filter-sidebar" id="filter-sidebar">
+        <button id="drawer-close" class="drawer-close-btn" aria-label="Close filters">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+            <path d="M1 1l9 9M10 1L1 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="flex items-center justify-between mb-5">
+          <p class="font-body text-[10px] tracking-[0.22em] uppercase text-knzo-gold">Filters</p>
+          <button id="reset-filters" class="reset-btn">Reset all</button>
+        </div>
+
+        <!-- Brand -->
+        <div class="sidebar-section">
+          <p class="sidebar-heading">Brand</p>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="brand" value="seiko">
+            <span>Seiko</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="brand" value="citizen">
+            <span>Citizen</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="brand" value="fossil">
+            <span>Fossil</span>
+          </label>
+        </div>
+
+        <!-- Sort -->
+        <div class="sidebar-section">
+          <p class="sidebar-heading">Sort By</p>
+          <select id="sort-select" class="filter-select">
+            <option value="newest">Newest Added</option>
+            <option value="oldest">Oldest Added</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="alpha-asc">Name: A → Z</option>
+            <option value="alpha-desc">Name: Z → A</option>
+          </select>
+        </div>
+
+        <!-- Price Range -->
+        <div class="sidebar-section">
+          <p class="sidebar-heading">Price Range</p>
+          <div class="range-wrap">
+            <div class="range-track"></div>
+            <div id="range-fill" class="range-fill"></div>
+            <input type="range" id="price-min-range" min="0" max="50000" value="0" step="500">
+            <input type="range" id="price-max-range" min="0" max="50000" value="50000" step="500">
+          </div>
+          <div class="price-labels">
+            <span id="price-min-label" class="price-label">₱0</span>
+            <span id="price-max-label" class="price-label">₱50,000</span>
+          </div>
+        </div>
+
+        <!-- Availability -->
+        <div class="sidebar-section">
+          <p class="sidebar-heading">Availability</p>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="stock" value="inStock">
+            <span>In Stock</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="stock" value="outOfStock">
+            <span>Out of Stock</span>
+          </label>
+        </div>
+
+        <!-- Seiko Line -->
+        <div class="sidebar-section">
+          <p class="sidebar-heading">Seiko Line</p>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="series" value="prospex">
+            <span>Prospex</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="series" value="5sports">
+            <span>5 Sports</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="series" value="presage">
+            <span>Presage</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="series" value="lukia">
+            <span>Lukia</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="series" value="ladies">
+            <span>Ladies</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="series" value="skx">
+            <span>SKX</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="series" value="selection">
+            <span>Selection</span>
+          </label>
+        </div>
+
+        <!-- Edition -->
+        <div class="sidebar-section">
+          <p class="sidebar-heading">Edition</p>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="edition" value="special">
+            <span>Special Edition</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="edition" value="limited">
+            <span>Limited Edition</span>
+          </label>
+        </div>
+
+        <!-- Gender -->
+        <div class="sidebar-section">
+          <p class="sidebar-heading">Gender</p>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="gender" value="men">
+            <span>Men's</span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" data-filter="gender" value="women">
+            <span>Women's</span>
+          </label>
+        </div>
+      </aside>
+
+      <!-- ── Grid ── -->
+      <div class="flex-1 min-w-0">
+        <div id="watch-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-7"></div>
+        <div id="empty-state" class="empty-state flex-col items-center justify-center py-28 text-center">
+          <svg viewBox="0 0 48 48" fill="none" class="w-12 h-12 mx-auto mb-6" style="opacity:0.3">
+            <circle cx="24" cy="24" r="19" stroke="#B29A4B" stroke-width="1.4"/>
+            <path d="M16 24h16M24 16v16" stroke="#B29A4B" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <p class="font-display text-2xl font-light text-knzo-cream/40 mb-2">No watches found</p>
+          <p class="font-body text-xs text-knzo-silver/30 tracking-[0.12em]">Try adjusting your filters</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Mobile drawer overlay -->
+  <div id="drawer-overlay" class="drawer-overlay"></div>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="border-t border-white/5 py-10 px-6 md:px-14">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <img src="Brand_assets/Z LOGO.png" alt="KNZO Timepieces" style="height: 44px; width: auto; opacity: 0.75;">
+      <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-silver/25 text-center">
+        © 2025 KNZO Timepieces &nbsp;·&nbsp; Precision in Every Detail
+      </p>
+      <div class="flex gap-8">
+        <a href="catalog.html" class="nav-link">Collection</a>
+        <a href="index.html#about"   class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Watch data ──────────────────────────────────────────────────────────
+    const watches = [
+      {
+        brand:      "Seiko Prospex",
+        brandTag:   "seiko",
+        name:       "SSC813 Panda",
+        price:      "₱27,500",
+        specs:      "Solar Chronograph · Tachymeter · Sapphire Crystal",
+        image:      "Brand_assets/Seiko Photos/SEIKO SSC813 PANDA V1/Panda V1 - 1.jpg",
+        alt:        "Seiko Prospex SSC813 Panda Chronograph",
+        inStock:    true, gender: "men", edition: "",
+        hoverImage: "Brand_assets/Seiko Photos/SEIKO SSC813 PANDA V1/Panda V1 - 2.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-ssc813.html",
+      },
+      {
+        brand:      "Seiko SKX",
+        brandTag:   "seiko",
+        name:       "SKX009 Pepsi",
+        price:      "₱23,000",
+        specs:      "Automatic · 200m Water Resistance · Pepsi Bezel",
+        image:      "Brand_assets/Seiko Photos/SKX009 PEPSI DIVERS/Pepsi Divers - 1.jpg",
+        alt:        "Seiko SKX009 Pepsi Diver",
+        inStock:    true, gender: "men", edition: "",
+        hoverImage: "Brand_assets/Seiko Photos/SKX009 PEPSI DIVERS/Pepsi Divers - 2.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-skx009.html",
+      },
+      {
+        brand:      "Seiko Selection",
+        brandTag:   "seiko",
+        name:       "SSDE009 Open Heart",
+        price:      "₱XX,XXX",
+        specs:      "34.2mm · 10.8mm Thickness · 100m Water Resist · 41HR Power Reserve · 4R38 Movement",
+        image:      "Brand_assets/Seiko Photos/SSDE009 Open Heart White Dial/Open Heart White Dial - 1.jpg",
+        alt:        "Seiko Selection SSDE009 Open Heart White Dial",
+        inStock:    true, gender: "women", edition: "",
+        hoverImage: "Brand_assets/Seiko Photos/SSDE009 Open Heart White Dial/Open Heart White Dial - 2.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-ssde009.html",
+      },
+      {
+        brand:      "Seiko Selection",
+        brandTag:   "seiko",
+        name:       "SSEH001 Silver Tank",
+        price:      "₱XX,XXX",
+        specs:      "18.9mm · 4.9mm Thickness · 30m Water Resist · Quartz · 4N30 Movement",
+        image:      "Brand_assets/Seiko Photos/SSEH001 Classic Silver Tank Leather/(W) Classic Silver Tank 1.jpg",
+        alt:        "Seiko Selection SSEH001 Classic Silver Tank Leather",
+        inStock:    true, gender: "women", edition: "",
+        hoverImage: "Brand_assets/Seiko Photos/SSEH001 Classic Silver Tank Leather/(W) Classic Silver Tank 2.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-sseh001.html",
+      },
+      // ── Add more watches below ──
+      // {
+      //   brand:    "Omega",
+      //   brandTag: "omega",
+      //   name:     "Seamaster 300",
+      //   price:    "₱XXX,XXX",
+      //   specs:    "Co-Axial · 300m · Master Chronometer",
+      //   image:    "Brand_assets/OMEGA/photo.jpg",
+      //   alt:      "Omega Seamaster 300",
+      // },
+
+      // ── Citizen ──
+      {
+        brand:      "Citizen Tsuyosa",
+        brandTag:   "citizen",
+        name:       "NJ0150 Tsuyosa Green",
+        price:      "₱18,890",
+        specs:      "40mm · Automatic · Cal. 8210 · Steel Bracelet · Day-Date Display",
+        image:      "Brand_assets/HD CITIZEN PICS/TSUYOSA GREEN/IMG_3487.jpg",
+        alt:        "Citizen Tsuyosa NJ0150 Green Automatic",
+        inStock:    true, gender: "men", edition: "",
+        hoverImage: "Brand_assets/HD CITIZEN PICS/TSUYOSA GREEN/IMG_3482.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-nj0150.html",
+      },
+      {
+        brand:      "Citizen Tsuyosa",
+        brandTag:   "citizen",
+        name:       "NJ0151 Tsuyosa Blue",
+        price:      "₱18,890",
+        specs:      "40mm · Automatic · Cal. 8210 · Steel Bracelet · Day-Date Display",
+        image:      "Brand_assets/HD CITIZEN PICS/TSUYOSA BLUE/IMG_3475.jpg",
+        alt:        "Citizen Tsuyosa NJ0151 Blue Automatic",
+        inStock:    true, gender: "men", edition: "",
+        hoverImage: "Brand_assets/HD CITIZEN PICS/TSUYOSA BLUE/IMG_3476.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-nj0151.html",
+      },
+      {
+        brand:      "Citizen Eco-Drive",
+        brandTag:   "citizen",
+        name:       "BM6960 Eco-Drive Black",
+        price:      "₱11,590",
+        specs:      "Solar Eco-Drive · Cal. E111 · Steel Bracelet · Date Display · 100m Water Resist",
+        image:      "Brand_assets/HD CITIZEN PICS/ECO DRIVE BLACK/IMG_3496.jpg",
+        alt:        "Citizen Eco-Drive BM6960 Black Solar",
+        inStock:    true, gender: "men", edition: "",
+        hoverImage: "Brand_assets/HD CITIZEN PICS/ECO DRIVE BLACK/IMG_3497.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-bm6960-black.html",
+      },
+      {
+        brand:      "Citizen Eco-Drive",
+        brandTag:   "citizen",
+        name:       "BM6960 Eco-Drive White",
+        price:      "₱11,590",
+        specs:      "Solar Eco-Drive · Cal. E111 · Steel Bracelet · Date Display · 100m Water Resist",
+        image:      "Brand_assets/HD CITIZEN PICS/ECO DRIVE WHITE/IMG_3502.jpg",
+        alt:        "Citizen Eco-Drive BM6960 White Solar",
+        inStock:    true, gender: "men", edition: "",
+        hoverImage: "Brand_assets/HD CITIZEN PICS/ECO DRIVE WHITE/IMG_3503.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-bm6960-white.html",
+      },
+      {
+        brand:      "Citizen Automatic",
+        brandTag:   "citizen",
+        name:       "NH8350 Automatic Leather",
+        price:      "₱11,980",
+        specs:      "Automatic · Cal. 8200 · Leather Strap · Day-Date Display · 50m Water Resist",
+        image:      "Brand_assets/HD CITIZEN PICS/AUTOMATIC LEATHER/IMG_3507.jpg",
+        alt:        "Citizen NH8350 Automatic Leather",
+        inStock:    true, gender: "men", edition: "",
+        hoverImage: "Brand_assets/HD CITIZEN PICS/AUTOMATIC LEATHER/IMG_3508.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-nh8350.html",
+      },
+      {
+        brand:      "Citizen Quartz",
+        brandTag:   "citizen",
+        name:       "AK5008 Quartz Moon Phase",
+        price:      "₱10,000",
+        specs:      "Quartz · Cal. 6324 · Two-Tone Case & Bracelet · Moon Phase · Date Display",
+        image:      "Brand_assets/HD CITIZEN PICS/QUARTZ/IMG_3517.jpg",
+        alt:        "Citizen AK5008 Quartz Moon Phase Two-Tone",
+        inStock:    true, gender: "men", edition: "",
+        hoverImage: "Brand_assets/HD CITIZEN PICS/QUARTZ/IMG_3518.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-ak5008.html",
+      },
+
+      // ── Fossil ──
+      {
+        brand:      "Fossil x Minecraft",
+        brandTag:   "fossil",
+        name:       "LE1206 Grass Block",
+        price:      "₱38,000",
+        specs:      "44mm · Quartz Chronograph · 50m Water Resist · Leather Strap · Limited 1825pcs",
+        image:      "Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2050.jpg",
+        alt:        "Fossil x Minecraft Grass Block Limited Edition Chronograph",
+        inStock:    true, gender: "men", edition: "limited",
+        hoverImage: "Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2052.jpg",
+        hoverStyle: "smooth",
+        detailUrl:  "watch-le1206.html",
+      },
+
+    ];
+
+    // ─── Helpers ─────────────────────────────────────────────────────────────
+    function priceNum(str) { return parseInt(str.replace(/[₱,]/g, "")) || 0; }
+    function seriesTag(brand) {
+      if (brand.includes("Prospex"))  return "prospex";
+      if (brand.includes("5 Sports")) return "5sports";
+      if (brand.includes("Presage"))  return "presage";
+      if (brand.includes("Lukia"))    return "lukia";
+      if (brand.includes("Ladies"))   return "ladies";
+      if (brand.includes("SKX"))        return "skx";
+      if (brand.includes("Selection")) return "selection";
+      return "other";
+    }
+
+    // ─── State ───────────────────────────────────────────────────────────────
+    let searchQuery    = "";
+    let activeSort     = "newest";
+    let priceMin       = 0;
+    let priceMax       = 50000;
+    let activeBrands   = new Set();  // empty = show all
+    let activeStock    = new Set();  // empty = show all
+    let activeSeries   = new Set();  // empty = show all
+    let activeEditions = new Set();  // empty = show all
+    let activeGender   = new Set();  // empty = show all
+
+    // ─── Set dynamic price max from data ─────────────────────────────────────
+    const PRICE_CEIL = Math.ceil(Math.max(...watches.map(w => priceNum(w.price))) / 1000) * 1000;
+    priceMax = PRICE_CEIL;
+    document.getElementById("price-min-range").max = PRICE_CEIL;
+    document.getElementById("price-max-range").max = PRICE_CEIL;
+    document.getElementById("price-max-range").value = PRICE_CEIL;
+    document.getElementById("price-max-label").textContent = "₱" + PRICE_CEIL.toLocaleString();
+
+    // ─── Card builder ────────────────────────────────────────────────────────
+    function buildCard(w, delay) {
+      const article = document.createElement("article");
+      article.className = "watch-card reveal" + (delay ? " " + delay : "") + " rounded-sm overflow-hidden group";
+
+      const imgWrap = document.createElement("div");
+      imgWrap.className = "img-wrap relative overflow-hidden bg-knzo-elevated";
+      imgWrap.style.aspectRatio = "4/5";
+
+      const img = document.createElement("img");
+      img.src = w.image; img.alt = w.alt;
+      img.className = "w-full h-full object-cover";
+
+      // Hover swap image (Citizen only)
+      let hoverImg = null;
+      if (w.hoverImage) {
+        hoverImg = document.createElement("img");
+        hoverImg.src = w.hoverImage;
+        hoverImg.alt = w.alt;
+        hoverImg.className = "hover-img " + (w.hoverStyle === "smooth" ? "hover-smooth" : "hover-instant");
+      }
+
+      const gradOverlay = document.createElement("div");
+      gradOverlay.className = "absolute inset-0 bg-gradient-to-t from-knzo-black/68 via-transparent to-transparent";
+
+      const colorOverlay = document.createElement("div");
+      colorOverlay.className = "absolute inset-0";
+      colorOverlay.style.cssText = "background: rgba(178,154,75,0.04); mix-blend-mode: multiply;";
+
+      // Availability status (placed in info section, below price)
+      const stockEl = document.createElement("div");
+      stockEl.style.cssText = "display:flex;align-items:center;gap:6px;margin-top:0.5rem;";
+      const stockDot = document.createElement("span");
+      stockDot.style.cssText = `width:7px;height:7px;border-radius:50%;flex-shrink:0;background:${w.inStock ? "#4ade80" : "#f87171"};box-shadow:0 0 6px ${w.inStock ? "rgba(74,222,128,0.5)" : "rgba(248,113,113,0.5)"};`;
+      const stockText = document.createElement("span");
+      stockText.style.cssText = `font-family:'Inter',sans-serif;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:${w.inStock ? "rgba(74,222,128,0.9)" : "rgba(248,113,113,0.9)"};`;
+      stockText.textContent = w.inStock ? "Available" : "Unavailable";
+      stockEl.append(stockDot, stockText);
+
+      // No inquire hover button — cards link to detail pages
+
+      if (hoverImg) {
+        imgWrap.append(img, hoverImg, gradOverlay, colorOverlay);
+        article.addEventListener("touchstart",  () => article.classList.add("touch-active"),    { passive: true });
+        article.addEventListener("touchend",    () => article.classList.remove("touch-active"));
+        article.addEventListener("touchcancel", () => article.classList.remove("touch-active"));
+      } else {
+        imgWrap.append(img, gradOverlay, colorOverlay);
+      }
+
+      // If this watch has a detail page, make the card clickable
+      if (w.detailUrl) {
+        article.style.cursor = "pointer";
+        article.addEventListener("click", () => { window.location.href = w.detailUrl; });
+      }
+
+      const info = document.createElement("div");
+      info.className = "p-6";
+
+      const brandLabel = document.createElement("p");
+      brandLabel.className = "font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-1";
+      brandLabel.textContent = w.brand;
+
+      const row = document.createElement("div");
+      row.className = "flex justify-between items-baseline mb-3";
+
+      const nameEl = document.createElement("h3");
+      nameEl.className = "font-display text-[1.35rem] font-light text-knzo-cream";
+      nameEl.textContent = w.name;
+
+      const priceEl = document.createElement("p");
+      priceEl.className = "font-display text-lg text-knzo-gold";
+      priceEl.textContent = w.price;
+
+      row.append(nameEl, priceEl);
+
+      info.append(brandLabel, row, stockEl);
+      article.append(imgWrap, info);
+      return article;
+    }
+
+    // ─── Sort ─────────────────────────────────────────────────────────────────
+    function applySorting(arr) {
+      const s = [...arr];
+      switch (activeSort) {
+        case "price-asc":   return s.sort((a, b) => priceNum(a.price) - priceNum(b.price));
+        case "price-desc":  return s.sort((a, b) => priceNum(b.price) - priceNum(a.price));
+        case "alpha-asc":   return s.sort((a, b) => a.name.localeCompare(b.name));
+        case "alpha-desc":  return s.sort((a, b) => b.name.localeCompare(a.name));
+        case "oldest":      return s;
+        case "newest":      return s.reverse();
+        default:            return s;
+      }
+    }
+
+    // ─── Render ──────────────────────────────────────────────────────────────
+    function renderGrid() {
+      const grid    = document.getElementById("watch-grid");
+      const empty   = document.getElementById("empty-state");
+      const countEl = document.getElementById("result-count");
+      const q       = searchQuery.toLowerCase().trim();
+
+      let filtered = watches.filter(w => {
+        if (!w.image) return false;
+
+        // Search
+        if (q && !(w.name.toLowerCase().includes(q) || w.brand.toLowerCase().includes(q) || w.specs.toLowerCase().includes(q))) return false;
+
+        // Price range
+        const p = priceNum(w.price);
+        if (p < priceMin || p > priceMax) return false;
+
+        // Brand (empty Set = show all)
+        if (activeBrands.size > 0 && !activeBrands.has(w.brandTag)) return false;
+
+        // Stock (empty Set = show all)
+        if (activeStock.size > 0) {
+          const sv = w.inStock ? "inStock" : "outOfStock";
+          if (!activeStock.has(sv)) return false;
+        }
+
+        // Series (empty Set = show all)
+        if (activeSeries.size > 0 && !activeSeries.has(seriesTag(w.brand))) return false;
+
+        // Edition (empty Set = show all)
+        if (activeEditions.size > 0 && !activeEditions.has(w.edition || "")) return false;
+
+        // Gender (empty Set = show all)
+        if (activeGender.size > 0 && !activeGender.has(w.gender)) return false;
+
+        return true;
+      });
+
+      filtered = applySorting(filtered);
+      grid.replaceChildren();
+
+      if (filtered.length === 0) {
+        empty.classList.add("visible");
+        countEl.textContent = "";
+        return;
+      }
+
+      empty.classList.remove("visible");
+      countEl.textContent = filtered.length + (filtered.length === 1 ? " timepiece" : " timepieces");
+
+      const delays = ["", "d1", "d2"];
+      filtered.forEach((w, i) => {
+        const card = buildCard(w, delays[i % 3]);
+        grid.appendChild(card);
+        io.observe(card);
+      });
+
+      updateBadge();
+    }
+
+    // ─── Filter badge count ───────────────────────────────────────────────────
+    function updateBadge() {
+      let count = 0;
+      if (activeSort !== "newest") count++;
+      if (priceMin > 0 || priceMax < PRICE_CEIL) count++;
+      count += activeBrands.size + activeStock.size + activeSeries.size + activeEditions.size + activeGender.size;
+      const badge = document.getElementById("filter-badge");
+      if (count > 0) { badge.textContent = count; badge.style.display = "inline-flex"; }
+      else { badge.style.display = "none"; }
+    }
+
+    // ─── Price range slider ───────────────────────────────────────────────────
+    const rangeMinEl    = document.getElementById("price-min-range");
+    const rangeMaxEl    = document.getElementById("price-max-range");
+    const rangeFillEl   = document.getElementById("range-fill");
+    const minLabelEl    = document.getElementById("price-min-label");
+    const maxLabelEl    = document.getElementById("price-max-label");
+
+    function updateRangeFill() {
+      const lo = parseInt(rangeMinEl.value);
+      const hi = parseInt(rangeMaxEl.value);
+      const total = parseInt(rangeMinEl.max);
+      rangeFillEl.style.left  = (lo / total * 100) + "%";
+      rangeFillEl.style.right = ((total - hi) / total * 100) + "%";
+      minLabelEl.textContent = "₱" + lo.toLocaleString();
+      maxLabelEl.textContent = "₱" + hi.toLocaleString();
+    }
+
+    rangeMinEl.addEventListener("input", () => {
+      if (parseInt(rangeMinEl.value) > parseInt(rangeMaxEl.value) - 500)
+        rangeMinEl.value = parseInt(rangeMaxEl.value) - 500;
+      priceMin = parseInt(rangeMinEl.value);
+      updateRangeFill();
+      renderGrid();
+    });
+
+    rangeMaxEl.addEventListener("input", () => {
+      if (parseInt(rangeMaxEl.value) < parseInt(rangeMinEl.value) + 500)
+        rangeMaxEl.value = parseInt(rangeMinEl.value) + 500;
+      priceMax = parseInt(rangeMaxEl.value);
+      updateRangeFill();
+      renderGrid();
+    });
+
+    updateRangeFill();
+
+    // ─── Checkbox filters ────────────────────────────────────────────────────
+    function getSetForFilter(filterName) {
+      switch (filterName) {
+        case "brand":   return activeBrands;
+        case "stock":   return activeStock;
+        case "series":  return activeSeries;
+        case "edition": return activeEditions;
+        case "gender":  return activeGender;
+        default:        return null;
+      }
+    }
+
+    document.querySelectorAll("input[data-filter]").forEach(cb => {
+      cb.addEventListener("change", () => {
+        const set = getSetForFilter(cb.dataset.filter);
+        if (!set) return;
+        cb.checked ? set.add(cb.value) : set.delete(cb.value);
+        renderGrid();
+      });
+    });
+
+    // ─── Sort select ─────────────────────────────────────────────────────────
+    document.getElementById("sort-select").addEventListener("change", e => {
+      activeSort = e.target.value;
+      renderGrid();
+    });
+
+    // ─── Search ──────────────────────────────────────────────────────────────
+    document.getElementById("search-input").addEventListener("input", e => {
+      searchQuery = e.target.value;
+      renderGrid();
+    });
+
+    // ─── Reset all filters ───────────────────────────────────────────────────
+    function resetFilters() {
+      searchQuery = ""; activeSort = "newest";
+      priceMin = 0; priceMax = PRICE_CEIL;
+      activeBrands.clear(); activeStock.clear(); activeSeries.clear(); activeEditions.clear(); activeGender.clear();
+
+      document.getElementById("search-input").value = "";
+      document.getElementById("sort-select").value = "newest";
+      rangeMinEl.value = 0; rangeMaxEl.value = PRICE_CEIL;
+      updateRangeFill();
+      document.querySelectorAll("input[data-filter]").forEach(cb => cb.checked = false);
+      renderGrid();
+    }
+    document.getElementById("reset-filters").addEventListener("click", resetFilters);
+
+    // ─── Mobile drawer ───────────────────────────────────────────────────────
+    const sidebar       = document.getElementById("filter-sidebar");
+    const drawerOverlay = document.getElementById("drawer-overlay");
+    const filterToggle  = document.getElementById("filter-toggle");
+    const drawerClose   = document.getElementById("drawer-close");
+
+    function openDrawer() {
+      sidebar.classList.add("drawer-open");
+      drawerOverlay.classList.add("open");
+      filterToggle.setAttribute("aria-expanded", "true");
+    }
+    function closeDrawer() {
+      sidebar.classList.remove("drawer-open");
+      drawerOverlay.classList.remove("open");
+      filterToggle.setAttribute("aria-expanded", "false");
+    }
+
+    filterToggle.addEventListener("click", openDrawer);
+    drawerClose.addEventListener("click", closeDrawer);
+    drawerOverlay.addEventListener("click", closeDrawer);
+
+    // ─── Mobile nav menu ─────────────────────────────────────────────────────
+    const mobBtn  = document.getElementById("mob-btn");
+    const mobMenu = document.getElementById("mob-menu");
+    mobBtn.addEventListener("click", () => {
+      const open = mobMenu.classList.toggle("translate-x-full");
+      mobBtn.setAttribute("aria-expanded", String(!open));
+    });
+    function closeMob() {
+      mobMenu.classList.add("translate-x-full");
+      mobBtn.setAttribute("aria-expanded", "false");
+    }
+
+    // ─── Sticky sidebar: only when it fits the viewport ──────────────────────
+    function updateStickyBehavior() {
+      const sb = document.getElementById("filter-sidebar");
+      if (!sb || window.innerWidth <= 768) return;
+      const fits = sb.scrollHeight <= (window.innerHeight - 100);
+      sb.classList.toggle("is-sticky", fits);
+    }
+    updateStickyBehavior();
+    window.addEventListener("resize", updateStickyBehavior);
+
+    // ─── Scroll reveal ────────────────────────────────────────────────────────
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -36px 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+    // ─── Init ─────────────────────────────────────────────────────────────────
+    const urlParams  = new URLSearchParams(window.location.search);
+    const brandParam = urlParams.get("brand");
+    if (brandParam) {
+      activeBrands.add(brandParam);
+      const cb = document.querySelector(`input[data-filter="brand"][value="${CSS.escape(brandParam)}"]`);
+      if (cb) cb.checked = true;
+    }
+    renderGrid();
+  </script>
+</body>
+</html>

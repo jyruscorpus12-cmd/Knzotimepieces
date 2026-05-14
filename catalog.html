@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Brands — KNZO Timepieces</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            knzo: {
+              black:    '#0F0F0F',
+              dark:     '#131313',
+              surface:  '#1A1A1A',
+              elevated: '#222222',
+              gold:     '#B29A4B',
+              'gold-light': '#C9B06A',
+              'gold-dim':   '#7A6A30',
+              silver:   '#C4C4C4',
+              charcoal: '#414141',
+              cream:    '#F5F3EF',
+            }
+          },
+          fontFamily: {
+            display: ['"Libre Bodoni"', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @font-face {
+      font-family: 'Libre Bodoni';
+      font-weight: 100 900;
+      font-style: normal;
+      src: local('Inter'), local('Inter-Regular');
+      unicode-range: U+0025, U+002B, U+002C, U+002D, U+002E, U+0030-0039, U+20B1;
+    }
+    @font-face {
+      font-family: 'Libre Bodoni';
+      font-weight: 100 900;
+      font-style: italic;
+      src: local('Inter'), local('Inter-Regular');
+      unicode-range: U+0025, U+002B, U+002C, U+002D, U+002E, U+0030-0039, U+20B1;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0F0F0F;
+      color: #F5F3EF;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Grain ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── Gold gradient text ── */
+    .gold-text {
+      background: linear-gradient(135deg, #8A7535 0%, #C9B06A 35%, #B29A4B 65%, #7A6A30 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Buttons ── */
+    .btn-gold {
+      background: linear-gradient(135deg, #A8913F, #C9B06A 50%, #A8913F);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 4px 20px rgba(178,154,75,0.28), 0 1px 4px rgba(0,0,0,0.5);
+      transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease;
+    }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 8px 28px rgba(178,154,75,0.38), 0 2px 8px rgba(0,0,0,0.6); }
+    .btn-gold:active  { transform: translateY(0); }
+    .btn-gold:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
+
+    /* ── Nav ── */
+    nav {
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      background: rgba(15,15,15,0.82);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+    }
+    .nav-link {
+      color: rgba(245,243,239,0.55);
+      font-size: 0.825rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover         { color: #B29A4B; }
+    .nav-link.active        { color: #B29A4B; }
+    .nav-link:focus-visible { outline: 2px solid #B29A4B; outline-offset: 4px; border-radius: 2px; color: #B29A4B; }
+
+    /* ── Gold rule ── */
+    .gold-rule {
+      width: 44px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #B29A4B, transparent);
+    }
+
+    /* ── Logo cards ── */
+    .logo-card {
+      display: block;
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.28);
+      transition: transform 0.38s cubic-bezier(0.34,1.2,0.64,1), border-color 0.3s ease, box-shadow 0.38s ease;
+    }
+    .logo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.42s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .logo-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(178,154,75,0.3);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.55), 0 0 0 1px rgba(178,154,75,0.12);
+    }
+    .logo-card:hover img     { transform: scale(1.04); }
+    .logo-card:focus-visible { outline: 2px solid #B29A4B; outline-offset: 4px; }
+
+    /* ── View All card ── */
+    .view-all-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.5rem 2.5rem;
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      background: rgba(20,20,20,0.5);
+    }
+    .view-all-card:hover { border-color: rgba(178,154,75,0.25); background: rgba(178,154,75,0.04); }
+    .view-all-card:focus-visible { outline: 2px solid #B29A4B; outline-offset: 4px; }
+
+    /* ── Fade-up ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up    { animation: fadeUp 0.8s cubic-bezier(0.34,1.1,0.64,1) both; }
+    .fu-d1      { animation-delay: 0.1s; }
+    .fu-d2      { animation-delay: 0.22s; }
+    .fu-d3      { animation-delay: 0.34s; }
+    .fu-d4      { animation-delay: 0.46s; }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.34,1.1,0.64,1);
+    }
+    .reveal.in  { opacity: 1; transform: translateY(0); }
+    .reveal.d1  { transition-delay: 0.1s; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-14 py-4 flex items-center justify-between">
+    <a href="index.html" aria-label="KNZO Timepieces home">
+      <img src="Brand_assets/Z LOGO.png" alt="KNZO Timepieces" style="height: 44px; width: auto;">
+    </a>
+    <div class="hidden md:flex items-center gap-10">
+      <a href="catalog.html" class="nav-link active">Collection</a>
+      <a href="index.html#about"   class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </div>
+    <a href="index.html#contact" class="btn-gold hidden md:inline-block px-6 py-2.5 font-body text-[10px] tracking-[0.18em] uppercase text-knzo-black font-semibold rounded-sm">
+      Shop Now
+    </a>
+    <button id="mob-btn" class="md:hidden p-2 rounded" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="15" viewBox="0 0 22 15" fill="none">
+        <rect width="22" height="2" rx="1" fill="#F5F3EF"/>
+        <rect y="6.5" width="15" height="2" rx="1" fill="#F5F3EF"/>
+        <rect y="13" width="22" height="2" rx="1" fill="#F5F3EF"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mob-menu" class="fixed inset-0 z-40 bg-knzo-black/96 flex flex-col items-center justify-center gap-10 translate-x-full transition-transform duration-300 ease-in-out md:hidden">
+    <a href="catalog.html"        class="nav-link text-lg active" onclick="closeMob()">Collection</a>
+    <a href="index.html#about"    class="nav-link text-lg" onclick="closeMob()">About</a>
+    <a href="index.html#contact"  class="nav-link text-lg" onclick="closeMob()">Contact</a>
+    <a href="index.html#contact"  class="btn-gold mt-4 px-10 py-3.5 font-body text-xs tracking-[0.2em] uppercase text-knzo-black font-semibold rounded-sm" onclick="closeMob()">Shop Now</a>
+  </div>
+
+  <!-- ═══════════════════════════════ PAGE HEADER ═══════════════════════════════ -->
+  <section class="pt-36 pb-14 px-6 md:px-14 text-center">
+    <div class="max-w-7xl mx-auto">
+      <p class="fade-up font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-4">KNZO Timepieces</p>
+      <h1 class="fade-up fu-d1 font-display font-light tracking-[-0.03em] text-knzo-cream" style="font-size: clamp(2.5rem,5vw,4rem);">
+        Our Brands
+      </h1>
+      <div class="gold-rule mx-auto mt-6 fade-up fu-d2"></div>
+      <p class="fade-up fu-d3 font-body text-[11px] text-knzo-silver/40 tracking-[0.1em] mt-6 leading-[1.8]">
+        Select a brand to explore our curated selection of timepieces
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ BRAND CARDS ═══════════════════════════════ -->
+  <section class="px-6 md:px-14 pb-10">
+    <div class="max-w-5xl mx-auto">
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+
+        <a href="collection.html?brand=seiko" class="logo-card reveal" aria-label="Explore Seiko">
+          <img src="Brand_assets/Brand Logos/Seiko.png" alt="Seiko">
+        </a>
+
+        <a href="collection.html?brand=citizen" class="logo-card reveal d1" aria-label="Explore Citizen">
+          <img src="Brand_assets/Brand Logos/Citizen.png" alt="Citizen">
+        </a>
+
+        <a href="collection.html?brand=fossil" class="logo-card reveal d1" aria-label="Explore Fossil">
+          <img src="Brand_assets/Brand Logos/Fossil.png" alt="Fossil">
+        </a>
+
+      </div>
+
+      <!-- ── View All ── -->
+      <a href="collection.html" class="view-all-card reveal">
+        <svg viewBox="0 0 52 52" fill="none" style="width:32px;height:32px;flex-shrink:0;">
+          <circle cx="26" cy="26" r="21" stroke="#B29A4B" stroke-width="1.2"/>
+          <path d="M18 26h16M28 19l7 7-7 7" stroke="#B29A4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-gold/55 mb-1">All Brands</p>
+          <p class="font-display text-xl font-light text-knzo-cream/70">Browse the full collection</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer class="border-t border-white/5 py-10 px-6 md:px-14 mt-14">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <img src="Brand_assets/Z LOGO.png" alt="KNZO Timepieces" style="height: 44px; width: auto; opacity: 0.75;">
+      <p class="font-body text-[9px] tracking-[0.22em] uppercase text-knzo-silver/25 text-center">
+        © 2025 KNZO Timepieces &nbsp;·&nbsp; Precision in Every Detail
+      </p>
+      <div class="flex gap-8">
+        <a href="catalog.html"      class="nav-link">Collection</a>
+        <a href="index.html#about"   class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Mobile menu ──
+    const mobBtn  = document.getElementById("mob-btn");
+    const mobMenu = document.getElementById("mob-menu");
+    mobBtn.addEventListener("click", () => {
+      const open = mobMenu.classList.toggle("translate-x-full");
+      mobBtn.setAttribute("aria-expanded", String(!open));
+    });
+    function closeMob() {
+      mobMenu.classList.add("translate-x-full");
+      mobBtn.setAttribute("aria-expanded", "false");
+    }
+
+    // ── Scroll reveal ──
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -36px 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
