@@ -226,6 +226,32 @@
     a.tcard:active { transform: translateY(0); }
     a.tcard:focus-visible { outline: 2px solid #B29A4B; outline-offset: 3px; }
 
+    /* ── Collection carousel (mobile) / grid (desktop) ── */
+    .collection-wrap {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 1rem;
+      padding-bottom: 1rem;
+    }
+    .collection-wrap::-webkit-scrollbar { display: none; }
+    .collection-wrap > * {
+      flex: 0 0 72%;
+      scroll-snap-align: start;
+    }
+    @media (min-width: 768px) {
+      .collection-wrap {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.75rem;
+        overflow-x: visible;
+        padding-bottom: 0;
+      }
+      .collection-wrap > * { flex: none; }
+    }
+
     /* ── Reviews carousel (mobile) / grid (desktop) ── */
     .reviews-wrap {
       display: flex;
@@ -395,16 +421,18 @@
         <div class="gold-rule mx-auto mt-6"></div>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7">
+      <div class="collection-wrap">
 
         <!-- ── Random picks (injected by script below) ── -->
         <div id="rc-slot-1"></div>
         <div id="rc-slot-2"></div>
+        <div id="rc-slot-3"></div>
+        <div id="rc-slot-4"></div>
 
         <!-- ── Explore All ── -->
         <a href="catalog.html"
-           class="watch-card reveal d2 rounded-sm overflow-hidden group flex flex-col col-span-2 md:col-span-1">
-          <div class="img-wrap relative overflow-hidden flex items-center justify-center aspect-[16/7] md:aspect-[4/5]" style="background: linear-gradient(145deg, #141414, #111111);">
+           class="watch-card reveal d2 rounded-sm overflow-hidden group flex flex-col">
+          <div class="img-wrap relative overflow-hidden flex items-center justify-center" style="aspect-ratio:3/4; background: linear-gradient(145deg, #141414, #111111);">
             <div class="absolute inset-0" style="background: radial-gradient(ellipse 65% 55% at 50% 50%, rgba(178,154,75,0.08) 0%, transparent 68%);"></div>
             <!-- Corner decorations -->
             <div class="absolute top-7 left-7 w-12 h-12 border-l border-t border-knzo-gold/22 pointer-events-none"></div>
@@ -886,7 +914,7 @@
         const j = Math.floor(Math.random() * (i + 1));
         [inStock[i], inStock[j]] = [inStock[j], inStock[i]];
       }
-      const picked = inStock.slice(0, 2);
+      const picked = inStock.slice(0, 4);
 
       function buildCard(w, delay) {
         return `
@@ -913,6 +941,8 @@
 
       document.getElementById('rc-slot-1').outerHTML = buildCard(picked[0], false);
       document.getElementById('rc-slot-2').outerHTML = buildCard(picked[1], true);
+      document.getElementById('rc-slot-3').outerHTML = buildCard(picked[2], false);
+      document.getElementById('rc-slot-4').outerHTML = buildCard(picked[3], true);
 
       const rcIo = new IntersectionObserver((entries) => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rcIo.unobserve(e.target); } });
