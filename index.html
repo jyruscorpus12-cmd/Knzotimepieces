@@ -892,6 +892,11 @@
 
       document.getElementById('rc-slot-1').outerHTML = buildCard(picked[0], false);
       document.getElementById('rc-slot-2').outerHTML = buildCard(picked[1], true);
+
+      const rcIo = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rcIo.unobserve(e.target); } });
+      }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+      document.querySelectorAll('#collection .watch-card.reveal:not(.in)').forEach(el => rcIo.observe(el));
     })();
   </script>
 </body>
