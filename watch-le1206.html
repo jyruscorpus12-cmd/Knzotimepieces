@@ -155,6 +155,64 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════ RECOMMENDATIONS ═══════════════════════════════ -->
+  <section class="py-20 px-6 md:px-14 border-t border-white/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-10">
+        <p class="font-body text-[10px] tracking-[0.28em] uppercase text-knzo-gold mb-3">You May Also Like</p>
+        <h2 class="font-display font-light tracking-[-0.03em] text-knzo-cream" style="font-size: clamp(1.8rem,3.5vw,2.8rem);">Similar Timepieces</h2>
+        <div class="gold-rule mt-4"></div>
+      </div>
+      <div id="rec-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"></div>
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    const CURRENT_BRAND = 'fossil';
+    const CURRENT_URL   = 'watch-le1206.html';
+    const watches = [
+      { brand:"Seiko Prospex",     brandTag:"seiko",   name:"SSC813 Panda",            price:"₱27,500", image:"Brand_assets/Seiko Photos/SEIKO SSC813 PANDA V1/Panda V1 - 1.jpg",                             alt:"Seiko Prospex SSC813 Panda",          inStock:true, detailUrl:"watch-ssc813.html" },
+      { brand:"Seiko SKX",         brandTag:"seiko",   name:"SKX009 Pepsi",             price:"₱23,000", image:"Brand_assets/Seiko Photos/SKX009 PEPSI DIVERS/Pepsi Divers - 1.jpg",                            alt:"Seiko SKX009 Pepsi Diver",            inStock:true, detailUrl:"watch-skx009.html" },
+      { brand:"Seiko Selection",   brandTag:"seiko",   name:"SSDE009 Open Heart",       price:"₱XX,XXX", image:"Brand_assets/Seiko Photos/SSDE009 Open Heart White Dial/Open Heart White Dial - 1.jpg",         alt:"Seiko Selection SSDE009 Open Heart",  inStock:true, detailUrl:"watch-ssde009.html" },
+      { brand:"Seiko Selection",   brandTag:"seiko",   name:"SSEH001 Silver Tank",      price:"₱XX,XXX", image:"Brand_assets/Seiko Photos/SSEH001 Classic Silver Tank Leather/(W) Classic Silver Tank 1.jpg",   alt:"Seiko Selection SSEH001 Silver Tank", inStock:true, detailUrl:"watch-sseh001.html" },
+      { brand:"Citizen Tsuyosa",   brandTag:"citizen", name:"NJ0150 Tsuyosa Green",     price:"₱18,890", image:"Brand_assets/HD CITIZEN PICS/TSUYOSA GREEN/IMG_3487.jpg",                                       alt:"Citizen Tsuyosa NJ0150 Green",        inStock:true, detailUrl:"watch-nj0150.html" },
+      { brand:"Citizen Tsuyosa",   brandTag:"citizen", name:"NJ0151 Tsuyosa Blue",      price:"₱18,890", image:"Brand_assets/HD CITIZEN PICS/TSUYOSA BLUE/IMG_3475.jpg",                                        alt:"Citizen Tsuyosa NJ0151 Blue",         inStock:true, detailUrl:"watch-nj0151.html" },
+      { brand:"Citizen Eco-Drive", brandTag:"citizen", name:"BM6960 Eco-Drive Black",   price:"₱11,590", image:"Brand_assets/HD CITIZEN PICS/ECO DRIVE BLACK/IMG_3496.jpg",                                     alt:"Citizen Eco-Drive BM6960 Black",      inStock:true, detailUrl:"watch-bm6960-black.html" },
+      { brand:"Citizen Eco-Drive", brandTag:"citizen", name:"BM6960 Eco-Drive White",   price:"₱11,590", image:"Brand_assets/HD CITIZEN PICS/ECO DRIVE WHITE/IMG_3502.jpg",                                     alt:"Citizen Eco-Drive BM6960 White",      inStock:true, detailUrl:"watch-bm6960-white.html" },
+      { brand:"Citizen Automatic", brandTag:"citizen", name:"NH8350 Automatic Leather", price:"₱11,980", image:"Brand_assets/HD CITIZEN PICS/AUTOMATIC LEATHER/IMG_3507.jpg",                                   alt:"Citizen NH8350 Automatic Leather",    inStock:true, detailUrl:"watch-nh8350.html" },
+      { brand:"Citizen Quartz",    brandTag:"citizen", name:"AK5008 Quartz Moon Phase", price:"₱10,000", image:"Brand_assets/HD CITIZEN PICS/QUARTZ/IMG_3517.jpg",                                              alt:"Citizen AK5008 Quartz Moon Phase",    inStock:true, detailUrl:"watch-ak5008.html" },
+      { brand:"Fossil x Minecraft",brandTag:"fossil",  name:"LE1206 Grass Block",       price:"₱38,000", image:"Brand_assets/FOSSIL X MINECRAFT GRASS BLOCK/IMG_2050.jpg",                                      alt:"Fossil x Minecraft Grass Block",      inStock:true, detailUrl:"watch-le1206.html" },
+    ];
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    const eligible = watches.filter(w=>w.inStock && w.detailUrl!==CURRENT_URL);
+    const same     = shuffle(eligible.filter(w=>w.brandTag===CURRENT_BRAND));
+    const others   = shuffle(eligible.filter(w=>w.brandTag!==CURRENT_BRAND));
+    const picks    = [...same,...others].slice(0,4);
+    const grid     = document.getElementById('rec-grid');
+    picks.forEach(w=>{
+      const card = document.createElement('a');
+      card.href = w.detailUrl;
+      card.className = 'watch-card rounded-sm overflow-hidden group block';
+      card.innerHTML = `
+        <div class="relative overflow-hidden bg-knzo-elevated" style="aspect-ratio:3/4;">
+          <img src="${w.image}" alt="${w.alt}" class="w-full h-full object-cover" style="transition:transform 0.65s cubic-bezier(0.34,1.1,0.64,1);">
+          <div class="absolute inset-0 bg-gradient-to-t from-knzo-black/68 via-transparent to-transparent"></div>
+        </div>
+        <div class="p-4">
+          <p class="font-body text-[8px] tracking-[0.22em] uppercase text-knzo-gold/65 mb-1">${w.brand}</p>
+          <div class="flex justify-between items-baseline mb-2">
+            <h3 class="font-display text-base font-light text-knzo-cream">${w.name}</h3>
+            <p class="font-display text-sm text-knzo-gold">${w.price}</p>
+          </div>
+          <span class="font-body text-[9px] tracking-[0.16em] uppercase text-knzo-cream/50">View Details →</span>
+        </div>`;
+      grid.appendChild(card);
+    });
+  })();
+  </script>
+
+
   <footer class="border-t border-white/5 py-10 px-6 md:px-14">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
       <img src="Brand_assets/Z LOGO.png" alt="KNZO Timepieces" style="height:44px;width:auto;opacity:0.75;">
